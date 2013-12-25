@@ -1,3 +1,9 @@
+libdumbnet (1.12-3.1pexip1) pexip; urgency=low
+
+  * Prepare Pexip packaging
+
+ -- John-Mark Bell <jmb@pexip.com>  Wed, 25 Dec 2013 12:16:47 +0000
+
 libdumbnet (1.12-3.1) unstable; urgency=low
 
   * Non-maintainer upload.

@@ -3,9 +3,11 @@ Section: libs
 Priority: optional
 Standards-Version: 3.8.3
 Homepage: http://code.google.com/p/libdnet/
-Maintainer: Jan Christoph Nordholz <hesso@pool.math.tu-berlin.de>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Jan Christoph Nordholz <hesso@pool.math.tu-berlin.de>
 Build-Depends: debhelper (>> 7), autotools-dev, libtool, automake, autoconf, autoconf, dpatch, python-all-dev, python-central, python-pyrex, check
 XS-Python-Version: all
+XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
 
 Package: libdumbnet1
 Depends: ${shlibs:Depends}
