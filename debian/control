@@ -7,7 +7,7 @@ Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Jan Christoph Nordholz <hesso@pool.math.tu-berlin.de>
 Build-Depends: debhelper (>> 7), autotools-dev, libtool, automake, autoconf, autoconf, dpatch, python-all-dev, python-central, python-pyrex, check
 XS-Python-Version: all
-XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ jessie
 
 Package: libdumbnet1
 Depends: ${shlibs:Depends}
