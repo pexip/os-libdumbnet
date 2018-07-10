@@ -4,16 +4,16 @@
 
 include /usr/share/dpatch/dpatch.make
 
-ifeq ($(filter noopt,$(DEB_BUILD_OPTIONS)),)
-CFLAGS:=-O2 -g
-else
-CFLAGS:=-O0 -g
-endif
-
-configure: configure-stamp
+build-arch: build
+build-indep: build
 build: build-stamp
 install: install-stamp
 binary: binary-arch binary-indep
+
+COMMA = ,
+ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
+  NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
+endif
 
 configure-stamp: patch-stamp
 	dh_testdir
@@ -26,13 +26,17 @@ configure-stamp: patch-stamp
 	autoheader
 	automake --add-missing
 	autoconf
-	./configure CFLAGS="$(CFLAGS)" --prefix=/usr --mandir=/usr/share/man --with-python
+	./configure --prefix=/usr \
+		--mandir=/usr/share/man \
+		--libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
+		--with-python \
+		$(shell dpkg-buildflags --export=cmdline)
 	rm -f python/*.c
 	touch $@
 
 build-stamp: configure-stamp
 	dh_testdir
-	$(MAKE)
+	$(MAKE) $(NJOBS)
 ifeq ($(filter nocheck,$(DEB_BUILD_OPTIONS)),)
 	# Running test suite. Errors are being ignored because several tests
 	# are bound to fail:
@@ -56,8 +60,8 @@ binary-indep:
 binary-arch: install-stamp
 	dh_testdir
 	dh_testroot
-	$(MAKE) DESTDIR=$$(pwd)/debian/libdumbnet1 install
-	mkdir -p debian/libdumbnet-dev/usr/lib \
+	$(MAKE) DESTDIR=$(CURDIR)/debian/libdumbnet1 install
+	mkdir -p debian/libdumbnet-dev/usr/lib/$(DEB_HOST_MULTIARCH) \
 	         debian/libdumbnet-dev/usr/share/doc/libdumbnet-dev \
 	         debian/libdumbnet-dev/usr/share/man/man1
 	mkdir -p debian/python-dumbnet/usr/lib
@@ -67,9 +71,9 @@ binary-arch: install-stamp
 	    debian/libdumbnet-dev/usr/
 	mv debian/libdumbnet1/usr/share/man/* \
 	    debian/libdumbnet-dev/usr/share/man/
-	mv debian/libdumbnet1/usr/lib/libdumbnet.a \
-	   debian/libdumbnet1/usr/lib/libdumbnet.so \
-	    debian/libdumbnet-dev/usr/lib/
+	mv debian/libdumbnet1/usr/lib/$(DEB_HOST_MULTIARCH)/libdumbnet.a \
+	   debian/libdumbnet1/usr/lib/$(DEB_HOST_MULTIARCH)/libdumbnet.so \
+	    debian/libdumbnet-dev/usr/lib/$(DEB_HOST_MULTIARCH)/
 	mv debian/libdumbnet1/usr/lib/python* \
 	    debian/python-dumbnet/usr/lib
 	cp debian/dumbnet-config.1 debian/libdumbnet-dev/usr/share/man/man1/

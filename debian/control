@@ -1,17 +1,19 @@
 Source: libdumbnet
 Section: libs
 Priority: optional
-Standards-Version: 3.8.3
+Standards-Version: 3.9.6
 Homepage: http://code.google.com/p/libdnet/
 Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Debian QA Group <packages@qa.debian.org>
-Build-Depends: debhelper (>> 7), autotools-dev, libtool, automake, autoconf, autoconf, dpatch, python-all-dev (>= 2.6.6-3~), python-pyrex, check
+Build-Depends: debhelper (>> 9), autotools-dev, libtool, automake, autoconf, autoconf, dpatch, python-all-dev (>= 2.6.6-3~), python-pyrex, check, dh-python
 XS-Pexip-Upstream: http://ftp.debian.org/debian/ stretch
 
 Package: libdumbnet1
-Depends: ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Architecture: any
-Description: A dumb, portable networking library -- shared library
+Multi-Arch: same
+Description: dumb, portable networking library -- shared library
  libdumbnet provides a simplified, portable interface to several low-level
  networking routines, including
    * network address manipulation
@@ -27,10 +29,10 @@ Description: A dumb, portable networking library -- shared library
 
 Package: libdumbnet-dev
 Section: libdevel
-Depends: ${shlibs:Depends}, libdumbnet1 (= ${binary:Version})
+Depends: ${shlibs:Depends}, libdumbnet1 (= ${binary:Version}), ${misc:Depends}
 Pre-Depends: dpkg (>= 1.17.14)
 Architecture: any
-Description: A dumb, portable networking library -- development files
+Description: dumb, portable networking library -- development files
  libdumbnet provides a simplified, portable interface to several low-level
  networking routines, including
    * network address manipulation
@@ -46,10 +48,10 @@ Description: A dumb, portable networking library -- development files
 
 Package: python-dumbnet
 Section: python
-Depends: ${python:Depends}, ${shlibs:Depends}
+Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Provides: ${python:Provides}
 Architecture: any
-Description: A dumb, portable networking library -- python bindings
+Description: dumb, portable networking library -- python bindings
  libdumbnet provides a simplified, portable interface to several low-level
  networking routines, including
    * network address manipulation

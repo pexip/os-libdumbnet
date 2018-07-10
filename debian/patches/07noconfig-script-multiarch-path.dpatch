@@ -1,0 +1,13 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+
+@DPATCH@
+--- a/dumbnet-config.in
++++ b/dumbnet-config.in
+@@ -49,6 +49,6 @@
+ fi
+ 
+ if test "$echo_libs" = "yes"; then
+-      echo -L@libdir@ -ldumbnet @LIBS@
++      echo -ldumbnet @LIBS@
+ fi      
+ 

@@ -4,3 +4,4 @@
 04kfreebsd
 05groff_hyphens
 06use_tun_bsd
+07noconfig-script-multiarch-path

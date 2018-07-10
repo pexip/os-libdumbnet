@@ -1,3 +1,14 @@
+libdumbnet (1.12-7) unstable; urgency=medium
+
+  * QA upload.
+  * Multiarchify the library package.
+  * Build using dpkg-buildflags.
+  * Bump the lintian and debhelper level.
+  * Build using dh-python.
+  * Enable parallel builds.
+
+ -- Matthias Klose <doko@debian.org>  Fri, 05 Feb 2016 12:24:58 +0100
+
 libdumbnet (1.12-6pexip1) pexip; urgency=low
 
   * Migrate to Jessie
