@@ -1,3 +1,9 @@
+libdumbnet (1.12-7pexip1) pexip; urgency=medium
+
+  * Migrate to Stretch
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 10 Jul 2018 11:14:36 +0000
+
 libdumbnet (1.12-7) unstable; urgency=medium
 
   * QA upload.
