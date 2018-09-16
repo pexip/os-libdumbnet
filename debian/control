@@ -4,7 +4,8 @@ Priority: optional
 Standards-Version: 3.9.6
 Homepage: http://code.google.com/p/libdnet/
 Maintainer: Debian QA Group <packages@qa.debian.org>
-Build-Depends: debhelper (>> 9), autotools-dev, libtool, automake, autoconf, autoconf, dpatch, python-all-dev (>= 2.6.6-3~), python-pyrex, check, dh-python
+Build-Depends: debhelper (>> 9), autotools-dev, libtool, automake, autoconf, dpatch, python-all-dev (>= 2.6.6-3~), python-pyrex, check, dh-python
+Rules-Requires-Root: no
 
 Package: libdumbnet1
 Pre-Depends: ${misc:Pre-Depends}
