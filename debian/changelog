@@ -1,3 +1,10 @@
+libdumbnet (1.12-9) unstable; urgency=medium
+
+  * QA upload.
+  * Drop the Python subpackage.
+
+ -- Andrey Rahmatullin <wrar@debian.org>  Wed, 21 Aug 2019 22:12:02 +0500
+
 libdumbnet (1.12-8) unstable; urgency=medium
 
   * QA upload.
