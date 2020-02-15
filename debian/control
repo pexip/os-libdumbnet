@@ -6,7 +6,7 @@ Homepage: http://code.google.com/p/libdnet/
 Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Debian QA Group <packages@qa.debian.org>
 Build-Depends: debhelper (>> 9), autotools-dev, libtool, automake, autoconf, autoconf, dpatch, python-all-dev (>= 2.6.6-3~), python-pyrex, check, dh-python
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ stretch
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ buster
 
 Package: libdumbnet1
 Pre-Depends: ${misc:Pre-Depends}
