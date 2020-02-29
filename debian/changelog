@@ -1,3 +1,9 @@
+libdumbnet (1.12-8pexip1) pexip; urgency=medium
+
+  * Migrate to Buster
+
+ -- Vincent Sanders <vince@pexip.com>  Sat, 29 Feb 2020 09:11:20 +0000
+
 libdumbnet (1.12-8) unstable; urgency=medium
 
   * QA upload.
