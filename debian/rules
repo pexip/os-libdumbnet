@@ -10,14 +10,8 @@ build: build-stamp
 install: install-stamp
 binary: binary-arch binary-indep
 
-COMMA = ,
-ifneq (,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
-  NJOBS := -j $(subst parallel=,,$(filter parallel=%,$(subst $(COMMA), ,$(DEB_BUILD_OPTIONS))))
-endif
-
 configure-stamp: patch-stamp
 	dh_testdir
-	dh_prep -k
 	cp /usr/share/misc/config.sub \
 	   /usr/share/misc/config.guess \
 	    config/
@@ -26,7 +20,7 @@ configure-stamp: patch-stamp
 	autoheader
 	automake --add-missing
 	autoconf
-	./configure --prefix=/usr \
+	dh_auto_configure -- --prefix=/usr \
 		--mandir=/usr/share/man \
 		--libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
 		--with-python \
@@ -36,7 +30,7 @@ configure-stamp: patch-stamp
 
 build-stamp: configure-stamp
 	dh_testdir
-	$(MAKE) $(NJOBS)
+	dh_auto_build
 ifeq ($(filter nocheck,$(DEB_BUILD_OPTIONS)),)
 	# Running test suite. Errors are being ignored because several tests
 	# are bound to fail:
@@ -60,7 +54,8 @@ binary-indep:
 binary-arch: install-stamp
 	dh_testdir
 	dh_testroot
-	$(MAKE) DESTDIR=$(CURDIR)/debian/libdumbnet1 install
+	dh_prep
+	dh_auto_install --destdir $(CURDIR)/debian/libdumbnet1
 	mkdir -p debian/libdumbnet-dev/usr/lib/$(DEB_HOST_MULTIARCH) \
 	         debian/libdumbnet-dev/usr/share/doc/libdumbnet-dev \
 	         debian/libdumbnet-dev/usr/share/man/man1
@@ -102,7 +97,7 @@ clean:
 	[ ! -f Makefile ] || $(MAKE) clean maintainer-clean
 	rm -rf autom4te.cache/ config/config.sub config/config.guess \
 	       configure config/ltmain.sh aclocal.m4 python/*.c \
-	       python/Makefile python/setup.py
+	       python/Makefile python/setup.py config/test-driver config/compile
 	find . -\( -name Makefile.in -or -name config.h.in -\) -print0 | xargs -0r -- rm -f
 	dpatch deapply-all
 	dh_clean

@@ -1,3 +1,14 @@
+libdumbnet (1.12-8) unstable; urgency=medium
+
+  * QA upload.
+  * Correct the placement and the call to dh_prep.  (Closes: #908910)
+  * Use dh_auto_{configure,build,install} as they know how to pass
+    cross-building information to the upstream build system.
+  * Set Rules-Requires-Root to "no".
+  * Remove duplicated Build-Depends on autoconf.
+
+ -- Niels Thykier <niels@thykier.net>  Sun, 16 Sep 2018 07:24:55 +0000
+
 libdumbnet (1.12-7+b1pexip1) pexip; urgency=medium
 
   * Migrate to Stretch
