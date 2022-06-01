@@ -5,7 +5,7 @@ Standards-Version: 3.9.6
 Homepage: http://code.google.com/p/libdnet/
 Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Debian QA Group <packages@qa.debian.org>
-Build-Depends: debhelper (>> 9), autotools-dev, libtool, automake, autoconf, dpatch, python-all-dev (>= 2.6.6-3~), python-pyrex, check, dh-python
+Build-Depends: debhelper (>> 9), autotools-dev, libtool, automake, autoconf, dpatch, check
 Rules-Requires-Root: no
 XS-Pexip-Upstream: http://deb.debian.org/debian/ bullseye
 
@@ -46,22 +46,3 @@ Description: dumb, portable networking library -- development files
  in Debian in favour of the older DECnet library 'libdnet'.
  .
  This package contains the static library and the C header files.
-
-Package: python-dumbnet
-Section: python
-Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
-Provides: ${python:Provides}
-Architecture: any
-Description: dumb, portable networking library -- python bindings
- libdumbnet provides a simplified, portable interface to several low-level
- networking routines, including
-   * network address manipulation
-   * kernel arp(4) cache and route(4) table lookup and manipulation
-   * network firewalling (Ip filter, ipfw, ipchains, pdf, ...)
-   * network interface lookup and manipulation
-   * raw IP packet and Ethernet frame transmission
- .
- libdumbnet is known as libdnet in other distributions, but was renamed
- in Debian in favour of the older DECnet library 'libdnet'.
- .
- This package contains the corresponding 'dumbnet' Python module.

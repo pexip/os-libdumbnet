@@ -23,9 +23,8 @@ configure-stamp: patch-stamp
 	dh_auto_configure -- --prefix=/usr \
 		--mandir=/usr/share/man \
 		--libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
-		--with-python \
+		--without-python \
 		$(shell dpkg-buildflags --export=cmdline)
-	rm -f python/*.c
 	touch $@
 
 build-stamp: configure-stamp
@@ -59,7 +58,6 @@ binary-arch: install-stamp
 	mkdir -p debian/libdumbnet-dev/usr/lib/$(DEB_HOST_MULTIARCH) \
 	         debian/libdumbnet-dev/usr/share/doc/libdumbnet-dev \
 	         debian/libdumbnet-dev/usr/share/man/man1
-	mkdir -p debian/python-dumbnet/usr/lib
 	mv debian/libdumbnet1/usr/include \
 	   debian/libdumbnet1/usr/sbin \
 	   debian/libdumbnet1/usr/bin \
@@ -69,8 +67,6 @@ binary-arch: install-stamp
 	mv debian/libdumbnet1/usr/lib/$(DEB_HOST_MULTIARCH)/libdumbnet.a \
 	   debian/libdumbnet1/usr/lib/$(DEB_HOST_MULTIARCH)/libdumbnet.so \
 	    debian/libdumbnet-dev/usr/lib/$(DEB_HOST_MULTIARCH)/
-	mv debian/libdumbnet1/usr/lib/python* \
-	    debian/python-dumbnet/usr/lib
 	cp debian/dumbnet-config.1 debian/libdumbnet-dev/usr/share/man/man1/
 	ln -s dumbnet-config.1 debian/libdumbnet-dev/usr/share/man/man1/dnet-config.1
 	ln -s ../libdumbnet1 debian/libdumbnet-dev/usr/share/doc/libdumbnet-dev/docs
@@ -78,10 +74,6 @@ binary-arch: install-stamp
 	dh_installchangelogs
 	dh_installdocs -plibdumbnet1 TODO README
 	dh_installdocs -Nlibdumbnet1
-	dh_python2 -ppython-dumbnet
-	for E in debian/python-dumbnet/usr/lib/python*; do \
-	  rm -f $$E/site-packages/*egg-info; \
-	done
 	dh_strip
 	dh_compress
 	dh_fixperms
@@ -96,8 +88,8 @@ clean:
 	rm -f *-stamp
 	[ ! -f Makefile ] || $(MAKE) clean maintainer-clean
 	rm -rf autom4te.cache/ config/config.sub config/config.guess \
-	       configure config/ltmain.sh aclocal.m4 python/*.c \
-	       python/Makefile python/setup.py config/test-driver config/compile
+	       configure config/ltmain.sh aclocal.m4 \
+	       config/test-driver config/compile
 	find . -\( -name Makefile.in -or -name config.h.in -\) -print0 | xargs -0r -- rm -f
 	dpatch deapply-all
 	dh_clean
