@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: fw-ipchains.c 507 2004-05-05 21:25:20Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

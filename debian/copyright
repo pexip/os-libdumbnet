@@ -1,76 +1,131 @@
-This package was debianized by Jan Christoph Nordholz
-<hesso@pool.math.tu-berlin.de>.
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: libdnet
+Upstream-Contact: Dug Song <dugsong@monkey.org>, Oliver Falk <oliver@linux-kernel.at>
+Source: https://github.com/ofalk/libdnet
+Comment: Several files contained in this package stem from BSD origins and still bear
+  the old 4-clause BSD license. The only copyright holders of those files are
+  the University of California (who have retroactively removed the "ad clause")
+  and Dug Song (who has placed this software under the 3-clause BSD), so the
+  3-clause BSD license applies uniformly to all files.
 
-Upstream Homepage: http://code.google.com/p/libdnet/
-Upstream Author: Dug Song <dugsong@monkey.org>
+Files: *
+Copyright: 2000-2006, Dug Song <dugsong@monkey.org>
+License: BSD-3-clause
 
-Copyright for include/queue.h:
-  Copyright (c) 1991, 1993 The Regents of the University of California.
-  All rights reserved.
+Files: include/queue.h
+  src/memcmp.c
+  src/strsep.c
+Copyright: 1990, 1993, The Regents of the University of California.
+  1990, The Regents of the University of California.
+  1991, 1993, The Regents of the University of California.
+License: BSD-4-clause
 
-Copyright for include/dnet/rand.h and src/rand.c:
-  Copyright (c) 2000 Dug Song <dugsong@monkey.org>
-  Copyright (c) 1996 David Mazieres <dm@lcs.mit.edu>
+Files: include/dnet/rand.h
+  src/rand.c
+Copyright: 1996, David Mazieres <dm@lcs.mit.edu>
+  2000, Dug Song <dugsong@monkey.org>
+License: BSD-3-clause
 
-Copyright for src/strlcat.c and src/strlcpy.c:
-  Copyright (c) 1998 Todd C. Miller <Todd.Miller@courtesan.com>
-  All rights reserved.
+Files: src/strlcat.c
+  src/strlcpy.c
+Copyright: 1998, Todd C. Miller <Todd.Miller@courtesan.com>
+License: BSD-3-clause
 
-Copyright for src/memcmp.c:
-  Copyright (c) 1990 The Regents of the University of California.
-  All rights reserved.
+Files: include/err.h
+  src/err.c
+Copyright: 1993, The Regents of the University of California.
+  2000, Dug Song <dugsong@monkey.org>
+License: BSD-4-clause
 
-Copyright for src/strsep.c:
-  Copyright (c) 1990, 1993 The Regents of the University of California.
-  All rights reserved.
+Files: src/fw-pktfilter.c
+Copyright: 2001, Jean-Baptiste Marchand, Hervé Schauer Consultants.
+  2002, Dug Song <dugsong@monkey.org>
+License: BSD-3-clause
 
-Copyright for include/err.h and src/err.c:
-  Copyright (c) 2000 Dug Song <dugsong@monkey.org>
-  Copyright (c) 1993 The Regents of the University of California.
-  All rights reserved.
+Files: src/route-bsd.c
+Copyright: 1999, Masaki Hirabaru <masaki@merit.edu>
+  2001, Dug Song <dugsong@monkey.org>
+License: BSD-3-clause
 
-Copyright for src/fw-pktfilter.c:
-  Copyright (c) 2002 Dug Song <dugsong@monkey.org>
-  Copyright (c) 2001 Jean-Baptiste Marchand, Hervé Schauer Consultants.  
+Files: python/dnet.pyx
+Copyright: 2023, Oliver Falk
+License: BSD-3-clause
 
-Copyright for src/route-bsd.c:
-  Copyright (c) 2001 Dug Song <dugsong@monkey.org>
-  Copyright (c) 1999 Masaki Hirabaru <masaki@merit.edu>
+Files: include/dnet/sctp.h
+Copyright: 2008-2009, Daniel Roethlisberger <daniel@roe.ch>
+License: BSD-3-clause
 
-Copyright for all other files:
-  Copyright (c) 2000-2006 Dug Song <dugsong@monkey.org>
+Files: src/crc32ct.h
+Copyright: No license required for any purpose;
+  the work is not subject to copyright in any jurisdiction.
+License: public-domain
+  https://www.rfc-editor.org/rfc/rfc3309.html
+  https://www.rfc-editor.org/faq/#copyright
 
-License:
-  This package is distributed under a 3-clause BSD license.
+Files: debian/*
+Copyright: 2002-2003, Simon Law <sfllaw@debian.org>
+  2005, Javier Fernandez-Sanguino Pen~a <jfs@computer.org>
+  2009, Jan Christoph Nordholz <hesso@pool.math.tu-berlin.de>
+  2016, Matthias Klose <doko@debian.org>
+  2018, Niels Thykier <niels@thykier.net>
+  2022, Sebastian Ramacher <sramacher@debian.org>
+  2022-2023, Florian Ernst <florian@debian.org>
+License: BSD-3-clause
 
+License: BSD-3-clause
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions 
+  are met:
+  .
+  1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+  . 
+  2. Redistributions in binary form must reproduce the above
+     copyright notice, this list of conditions and the following
+     disclaimer in the documentation and/or other materials provided
+     with the distribution.
+  .
+  3. The names of the authors and copyright holders may not be used 
+     to endorse or promote products derived from this software 
+     without specific prior written permission.
+  .
+  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED
+  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES 
+  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+  STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+  OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: BSD-4-clause
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
   are met:
-
   1. Redistributions of source code must retain the above copyright
      notice, this list of conditions and the following disclaimer.
   2. Redistributions in binary form must reproduce the above copyright
      notice, this list of conditions and the following disclaimer in the
      documentation and/or other materials provided with the distribution.
-  3. The names of the authors and copyright holders may not be used to
-     endorse or promote products derived from this software without
-     specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES,
-  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
-  THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-Note:
-  (include/queue.h, include/err.h, src/err.c, src/memcmp.c, src/strsep.c)
-Several files contained in this package stem from BSD origins and still bear
-the old 4-clause BSD license. The only copyright holders of those files are
-the University of California (who have retroactively removed the "ad clause")
-and Dug Song (who has placed this software under the 3-clause BSD), so the
-3-clause BSD license applies uniformly to all files.
+  3. All advertising materials mentioning features or use of this software
+     must display the following acknowledgement:
+        This product includes software developed by the University of
+        California, Berkeley and its contributors.
+  4. Neither the name of the University nor the names of its contributors
+     may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+  .
+  THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+  SUCH DAMAGE.

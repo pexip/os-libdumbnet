@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+if [ -n "${DEB_HOST_GNU_TYPE:-}" ]; then
+    CROSS_COMPILE=${DEB_HOST_GNU_TYPE}-
+else
+    CROSS_COMPILE=
+fi
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+
+# [<source>]=<params>
+declare -A tests=(
+    [addr]=127.0.0.42
+    [rand]=42
+    [route]=show
+)
+
+for key in "${!tests[@]}"; do
+    echo "-- $key"
+    echo "---- compile"
+    ${CROSS_COMPILE}gcc -pedantic -Wall -Werror -o $WORKDIR/$key debian/tests/$key.c $(dumbnet-config --cflags --libs)
+    echo "---- execute"
+    $WORKDIR/$key ${tests[$key]}
+    echo
+done

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: route.c 311 2002-03-29 05:24:36Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: tcp.c 279 2002-02-08 07:43:53Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

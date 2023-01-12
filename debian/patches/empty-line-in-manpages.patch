@@ -1,0 +1,18 @@
+Description: Fix groff warning about empty lines
+Author: Florian Ernst <florian@debian.org>
+Origin: vendor
+Last-Update: 2023-01-04
+Forwarded: https://github.com/ofalk/libdnet/issues/73#issue-1225699068
+
+Index: libdumbnet/test/dumbnet/dumbnet.8
+===================================================================
+--- libdumbnet.orig/test/dumbnet/dumbnet.8
++++ libdumbnet/test/dumbnet/dumbnet.8
+@@ -267,6 +267,6 @@ some adjustments to header include direc
+ .Sh AUTHORS
+ Dug Song
+ .Aq dugsong@monkey.org
+-
++.br
+ Oliver Falk
+ .Aq oliver@linux-kernel.at

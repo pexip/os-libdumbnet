@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: fw-pf.c 608 2005-03-15 05:05:37Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

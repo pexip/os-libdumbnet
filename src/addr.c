@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2000 Dug Song <dugsong@monkey.org>
  *
- * $Id: addr.c 610 2005-06-26 18:23:26Z dugsong $
+ * $Id$
  */
 
 #include "config.h"
@@ -165,7 +165,6 @@ addr_ntop(const struct addr *src, char *dst, size_t size)
 int
 addr_pton(const char *src, struct addr *dst)
 {
-	struct hostent *hp;
 	char *ep, tmp[300];
 	long bits = -1;
 	int i;
@@ -203,10 +202,6 @@ addr_pton(const char *src, struct addr *dst)
 	} else if (ip6_pton(tmp, &dst->addr_ip6) == 0) {
 		dst->addr_type = ADDR_TYPE_IP6;
 		dst->addr_bits = IP6_ADDR_BITS;
-	} else if ((hp = gethostbyname(tmp)) != NULL) {
-		memcpy(&dst->addr_ip, hp->h_addr, IP_ADDR_LEN);
-		dst->addr_type = ADDR_TYPE_IP;
-		dst->addr_bits = IP_ADDR_BITS;
 	} else {
 		errno = EINVAL;
 		return (-1);
@@ -249,7 +244,11 @@ addr_ntos(const struct addr *a, struct sockaddr *sa)
 # ifdef HAVE_SOCKADDR_SA_LEN
 		so->sdl.sdl_len = sizeof(so->sdl);
 # endif
+# ifdef AF_LINK 
 		so->sdl.sdl_family = AF_LINK;
+# else
+		so->sdl.sdl_family = AF_UNSPEC;
+#endif
 		so->sdl.sdl_alen = ETH_ADDR_LEN;
 		memcpy(LLADDR(&so->sdl), &a->addr_eth, ETH_ADDR_LEN);
 #else
@@ -296,6 +295,7 @@ addr_ston(const struct sockaddr *sa, struct addr *a)
 	
 	switch (sa->sa_family) {
 #ifdef HAVE_NET_IF_DL_H
+# ifdef AF_LINK
 	case AF_LINK:
 		if (so->sdl.sdl_alen != ETH_ADDR_LEN) {
 			errno = EINVAL;
@@ -305,6 +305,7 @@ addr_ston(const struct sockaddr *sa, struct addr *a)
 		a->addr_bits = ETH_ADDR_BITS;
 		memcpy(&a->addr_eth, LLADDR(&so->sdl), ETH_ADDR_LEN);
 		break;
+# endif
 #endif
 	case AF_UNSPEC:
 	case ARP_HRD_ETH:	/* XXX- Linux arp(7) */
@@ -381,8 +382,17 @@ addr_stob(const struct sockaddr *sa, uint16_t *bits)
 	} else
 #endif
 	{
+	p = (u_char *)&so->sin.sin_addr.s_addr;
 #ifdef HAVE_SOCKADDR_SA_LEN
-		if ((len = sa->sa_len - IP_ADDR_LEN) > IP_ADDR_LEN)
+	len = sa->sa_len - ((void *) p - (void *) sa);
+	/* Handles the special case of sa->sa_len == 0. */
+	if (len < 0)
+		len = 0;
+	else if (len > IP_ADDR_LEN)
+		len = IP_ADDR_LEN;
+	#else
+		len = IP_ADDR_LEN;
+
 #endif
 		len = IP_ADDR_LEN;
 		p = (u_char *)&so->sin.sin_addr.s_addr;

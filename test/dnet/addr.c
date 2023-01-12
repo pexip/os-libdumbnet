@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: addr.c 315 2002-03-29 06:07:08Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Dug Song <dugsong@monkey.org>
  *
- * $Id: route-win32.c 589 2005-02-15 07:11:32Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

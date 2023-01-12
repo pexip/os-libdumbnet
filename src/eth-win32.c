@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2000 Dug Song <dugsong@monkey.org>
  *
- * $Id: eth-win32.c 613 2005-09-26 02:46:57Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

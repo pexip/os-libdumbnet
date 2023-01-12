@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Dug Song <dugsong@monkey.org>
  *
- * $Id: send.c 279 2002-02-08 07:43:53Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

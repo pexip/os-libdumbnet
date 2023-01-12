@@ -1,4 +1,4 @@
-## $Id: Makefile.am 618 2006-01-15 06:42:19Z dugsong $
+## $Id$
 
 include $(top_srcdir)/Makefile.am.common
 
@@ -6,7 +6,7 @@ SUBDIRS =	include man src python test
 
 bin_SCRIPTS =	dnet-config
 
-EXTRA_DIST =	LICENSE Makefile.am.common acconfig.h
+EXTRA_DIST =	LICENSE Makefile.am.common acconfig.h libdnet.spec
 
 CLEANFILES =	dnet-config
 
