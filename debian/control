@@ -7,7 +7,7 @@ Maintainer: Pexip AS <packaging@pexip.com>
 XSBC-Pexip-Original-Maintainer: Debian QA Group <packages@qa.debian.org>
 Build-Depends: debhelper (>> 9), autotools-dev, libtool, automake, autoconf, dpatch, check
 Rules-Requires-Root: no
-XS-Pexip-Upstream: http://deb.debian.org/debian/ bullseye
+XS-Pexip-Upstream: http://deb.debian.org/debian/ bookworm
 
 Package: libdumbnet1
 Pre-Depends: ${misc:Pre-Depends}
