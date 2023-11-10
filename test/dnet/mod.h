@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Dug Song <dugsong@monkey.org>
  *
- * $Id: mod.h 316 2002-03-29 06:07:27Z dugsong $
+ * $Id$
  */
 
 #ifndef MOD_H

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: arp.c 352 2002-05-08 04:55:32Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

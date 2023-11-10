@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: fw-ipf.c 593 2005-02-16 21:42:53Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

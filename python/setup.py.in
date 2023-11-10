@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import glob, os, sys
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
+from Cython.Build import cythonize
 
-dnet_srcs = [ '@srcdir@/dnet.c' ]
+dnet_srcs = [ '@srcdir@/dnet.pyx' ]
 dnet_incdirs = [ '@top_srcdir@/include' ]
 dnet_libdirs = []
 dnet_libs = []
@@ -20,7 +21,7 @@ else:
     # XXX - can't build on Cygwin+MinGW yet.
     #if sys.platform == 'cygwin':
     #    dnet_extargs.append('-mno-cygwin')
-    dnet_extobj.extend(glob.glob('@top_builddir@/src/.libs/*.o'))
+    dnet_extobj.extend(sorted(glob.glob('@top_builddir@/src/.libs/*.o')))
 
 dnet = Extension('dnet',
                  dnet_srcs,
@@ -36,4 +37,5 @@ setup(name='dnet',
       author='Dug Song',
       author_email='dugsong@monkey.org',
       url='http://libdnet.sourceforge.net/',
-      ext_modules = [ dnet ])
+      ext_modules =cythonize(dnet,compiler_directives = {"c_string_type": "str", 
+        "c_string_encoding":"ascii"}),)

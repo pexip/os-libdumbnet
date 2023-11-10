@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Dug Song <dugsong@monkey.org>
  *
- * $Id: intf-win32.c 632 2006-08-10 04:36:52Z dugsong $
+ * $Id$
  */
 
 #include "config.h"
@@ -209,7 +209,7 @@ _find_ifindex(intf_t *intf, const char *device)
 	char *p = (char *)device;
 	int n, type = _ifcombo_type(device);
 	
-	while (isalpha(*p)) p++;
+	while (isalpha((int) (unsigned char) *p)) p++;
 	n = atoi(p);
 
 	return (intf->ifcombo[type].idx[n]);

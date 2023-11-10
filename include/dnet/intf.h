@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2000 Dug Song <dugsong@monkey.org>
  *
- * $Id: intf.h 478 2004-01-13 07:41:09Z dugsong $
+ * $Id$
  */
 
 #ifndef DNET_INTF_H

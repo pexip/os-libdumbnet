@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Dug Song <dugsong@monkey.org>
  *
- * $Id: ip-win32.c 547 2005-01-25 21:30:40Z dugsong $
+ * $Id$
  */
 
 #include "config.h"
