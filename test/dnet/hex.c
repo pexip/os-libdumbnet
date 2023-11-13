@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: hex.c 488 2004-03-28 17:38:18Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

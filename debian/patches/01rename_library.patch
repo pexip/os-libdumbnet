@@ -1,0 +1,1505 @@
+Description: Rename upstream's conflicting libdnet to libdumbnet
+Author: Florian Ernst <florian@debian.org>
+Origin: vendor, debian/patches/01rename_library.sh.dpatch -patch
+Last-Update: 2022-05-04
+Forwarded: not-needed
+
+diff --git a/Makefile.am b/Makefile.am
+index 0282247..3137a6c 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -4,11 +4,11 @@ include $(top_srcdir)/Makefile.am.common
+ 
+ SUBDIRS =	include man src python test
+ 
+-bin_SCRIPTS =	dnet-config
++bin_SCRIPTS =	dumbnet-config
+ 
+-EXTRA_DIST =	LICENSE Makefile.am.common acconfig.h libdnet.spec
++EXTRA_DIST =	LICENSE Makefile.am.common acconfig.h libdumbnet.spec
+ 
+-CLEANFILES =	dnet-config
++CLEANFILES =	dumbnet-config
+ 
+ AUX_DIST =	$(ac_aux_dir)/acinclude.m4	\
+ 		$(ac_aux_dir)/config.guess	\
+diff --git a/configure.ac b/configure.ac
+index 298e0d0..d3f5a57 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -6,7 +6,7 @@ dnl
+ dnl $Id$
+ 
+ AC_PREREQ([2.69])
+-AC_INIT(libdnet, 1.16.3)
++AC_INIT(libdumbnet, 1.16.3)
+ AC_CONFIG_MACRO_DIR([m4])
+ AC_CONFIG_AUX_DIR(config)
+ AC_SUBST(ac_aux_dir)
+@@ -326,7 +326,7 @@ else
+ 	AC_LIBOBJ([tun-none])
+ fi
+ 
+-AC_OUTPUT([Makefile dnet-config include/Makefile include/dnet/Makefile
++AC_OUTPUT([Makefile dumbnet-config include/Makefile include/dumbnet/Makefile
+ 	man/Makefile src/Makefile python/Makefile python/setup.py
+-	test/Makefile test/check/Makefile test/dnet/Makefile],
+-	[chmod 755 dnet-config])
++	test/Makefile test/check/Makefile test/dumbnet/Makefile],
++	[chmod 755 dumbnet-config])
+diff --git a/dnet-config.in b/dumbnet-config.in
+similarity index 95%
+rename from dnet-config.in
+rename to dumbnet-config.in
+index 3db827f..a2e9274 100644
+--- a/dnet-config.in
++++ b/dumbnet-config.in
+@@ -10,7 +10,7 @@ libdir=@libdir@
+ usage()
+ {
+ 	cat <<EOF
+-Usage: dnet-config [OPTIONS]
++Usage: dumbnet-config [OPTIONS]
+ Options:
+ 	[--prefix[=DIR]]        change libxml prefix [default $prefix]
+ 	[--exec-prefix[=DIR]]   change libxml exec prefix [default $exec_prefix]
+@@ -86,7 +86,7 @@ if test "$echo_cflags" = "yes"; then
+ fi
+ 
+ if test "$echo_libs" = "yes"; then
+-      echo -L$libdir -ldnet @LIBS@
++      echo -L$libdir -ldumbnet @LIBS@
+ fi      
+ 
+ exit 0
+diff --git a/include/Makefile.am b/include/Makefile.am
+index 8db6313..c223e99 100644
+--- a/include/Makefile.am
++++ b/include/Makefile.am
+@@ -2,8 +2,8 @@
+ 
+ include $(top_srcdir)/Makefile.am.common
+ 
+-include_HEADERS = dnet.h
++include_HEADERS = dumbnet.h
+ 
+-SUBDIRS = dnet
++SUBDIRS = dumbnet
+ 
+ EXTRA_DIST = err.h queue.h
+diff --git a/include/dnet.h b/include/dnet.h
+deleted file mode 100644
+index f196c93..0000000
+--- a/include/dnet.h
++++ /dev/null
+@@ -1,33 +0,0 @@
+-/*
+- * dnet.h
+- *
+- * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
+- *
+- * $Id$
+- */
+-
+-#ifndef DNET_H
+-#define DNET_H
+-
+-#include <dnet/os.h>
+-
+-#include <dnet/eth.h>
+-#include <dnet/ip.h>
+-#include <dnet/ip6.h>
+-#include <dnet/addr.h>
+-#include <dnet/arp.h>
+-#include <dnet/ndisc.h>
+-#include <dnet/icmp.h>
+-#include <dnet/tcp.h>
+-#include <dnet/udp.h>
+-#include <dnet/sctp.h>
+-
+-#include <dnet/intf.h>
+-#include <dnet/route.h>
+-#include <dnet/fw.h>
+-#include <dnet/tun.h>
+-
+-#include <dnet/blob.h>
+-#include <dnet/rand.h>
+-
+-#endif /* DNET_H */
+diff --git a/include/dnet/Makefile.am b/include/dnet/Makefile.am
+deleted file mode 100644
+index c4e50e9..0000000
+--- a/include/dnet/Makefile.am
++++ /dev/null
+@@ -1,8 +0,0 @@
+-## $Id$
+-
+-include $(top_srcdir)/Makefile.am.common
+-
+-dnetincludedir = $(includedir)/dnet
+-
+-dnetinclude_HEADERS = addr.h arp.h blob.h eth.h fw.h icmp.h intf.h ip.h \
+-	ip6.h os.h rand.h route.h tcp.h tun.h udp.h sctp.h ndisc.h
+diff --git a/include/dumbnet.h b/include/dumbnet.h
+new file mode 100644
+index 0000000..e5160aa
+--- /dev/null
++++ b/include/dumbnet.h
+@@ -0,0 +1,33 @@
++/*
++ * dnet.h
++ *
++ * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
++ *
++ * $Id$
++ */
++
++#ifndef DNET_H
++#define DNET_H
++
++#include <dumbnet/os.h>
++
++#include <dumbnet/eth.h>
++#include <dumbnet/ip.h>
++#include <dumbnet/ip6.h>
++#include <dumbnet/addr.h>
++#include <dumbnet/arp.h>
++#include <dumbnet/ndisc.h>
++#include <dumbnet/icmp.h>
++#include <dumbnet/tcp.h>
++#include <dumbnet/udp.h>
++#include <dumbnet/sctp.h>
++
++#include <dumbnet/intf.h>
++#include <dumbnet/route.h>
++#include <dumbnet/fw.h>
++#include <dumbnet/tun.h>
++
++#include <dumbnet/blob.h>
++#include <dumbnet/rand.h>
++
++#endif /* DNET_H */
+diff --git a/include/dumbnet/Makefile.am b/include/dumbnet/Makefile.am
+new file mode 100644
+index 0000000..999c190
+--- /dev/null
++++ b/include/dumbnet/Makefile.am
+@@ -0,0 +1,8 @@
++## $Id$
++
++include $(top_srcdir)/Makefile.am.common
++
++dumbnetincludedir = $(includedir)/dumbnet
++
++dumbnetinclude_HEADERS = addr.h arp.h blob.h eth.h fw.h icmp.h intf.h ip.h \
++	ip6.h os.h rand.h route.h tcp.h tun.h udp.h sctp.h ndisc.h
+diff --git a/include/dnet/Makefile.in b/include/dumbnet/Makefile.in
+similarity index 100%
+rename from include/dnet/Makefile.in
+rename to include/dumbnet/Makefile.in
+diff --git a/include/dnet/addr.h b/include/dumbnet/addr.h
+similarity index 100%
+rename from include/dnet/addr.h
+rename to include/dumbnet/addr.h
+diff --git a/include/dnet/arp.h b/include/dumbnet/arp.h
+similarity index 100%
+rename from include/dnet/arp.h
+rename to include/dumbnet/arp.h
+diff --git a/include/dnet/blob.h b/include/dumbnet/blob.h
+similarity index 100%
+rename from include/dnet/blob.h
+rename to include/dumbnet/blob.h
+diff --git a/include/dnet/eth.h b/include/dumbnet/eth.h
+similarity index 100%
+rename from include/dnet/eth.h
+rename to include/dumbnet/eth.h
+diff --git a/include/dnet/fw.h b/include/dumbnet/fw.h
+similarity index 100%
+rename from include/dnet/fw.h
+rename to include/dumbnet/fw.h
+diff --git a/include/dnet/icmp.h b/include/dumbnet/icmp.h
+similarity index 100%
+rename from include/dnet/icmp.h
+rename to include/dumbnet/icmp.h
+diff --git a/include/dnet/intf.h b/include/dumbnet/intf.h
+similarity index 100%
+rename from include/dnet/intf.h
+rename to include/dumbnet/intf.h
+diff --git a/include/dnet/ip.h b/include/dumbnet/ip.h
+similarity index 100%
+rename from include/dnet/ip.h
+rename to include/dumbnet/ip.h
+diff --git a/include/dnet/ip6.h b/include/dumbnet/ip6.h
+similarity index 100%
+rename from include/dnet/ip6.h
+rename to include/dumbnet/ip6.h
+diff --git a/include/dnet/ndisc.h b/include/dumbnet/ndisc.h
+similarity index 100%
+rename from include/dnet/ndisc.h
+rename to include/dumbnet/ndisc.h
+diff --git a/include/dnet/os.h b/include/dumbnet/os.h
+similarity index 100%
+rename from include/dnet/os.h
+rename to include/dumbnet/os.h
+diff --git a/include/dnet/rand.h b/include/dumbnet/rand.h
+similarity index 100%
+rename from include/dnet/rand.h
+rename to include/dumbnet/rand.h
+diff --git a/include/dnet/route.h b/include/dumbnet/route.h
+similarity index 100%
+rename from include/dnet/route.h
+rename to include/dumbnet/route.h
+diff --git a/include/dnet/sctp.h b/include/dumbnet/sctp.h
+similarity index 100%
+rename from include/dnet/sctp.h
+rename to include/dumbnet/sctp.h
+diff --git a/include/dnet/tcp.h b/include/dumbnet/tcp.h
+similarity index 100%
+rename from include/dnet/tcp.h
+rename to include/dumbnet/tcp.h
+diff --git a/include/dnet/tun.h b/include/dumbnet/tun.h
+similarity index 100%
+rename from include/dnet/tun.h
+rename to include/dumbnet/tun.h
+diff --git a/include/dnet/udp.h b/include/dumbnet/udp.h
+similarity index 100%
+rename from include/dnet/udp.h
+rename to include/dumbnet/udp.h
+diff --git a/man/Makefile.am b/man/Makefile.am
+index e941b4c..f4d01f1 100644
+--- a/man/Makefile.am
++++ b/man/Makefile.am
+@@ -2,10 +2,10 @@
+ 
+ include $(top_srcdir)/Makefile.am.common
+ 
+-man_MANS = dnet.3
++man_MANS = dumbnet.3
+ 
+ EXTRA_DIST = $(man_MANS)
+ 
+-dnet.3.txt: dnet.3
+-	groff -t -e -mdoc -Tascii dnet.3 | col -bx > $@
++dumbnet.3.txt: dumbnet.3
++	groff -t -e -mdoc -Tascii dumbnet.3 | col -bx > $@
+ 
+diff --git a/man/dnet.3 b/man/dumbnet.3
+similarity index 97%
+rename from man/dnet.3
+rename to man/dumbnet.3
+index 6255c3c..bde5dae 100644
+--- a/man/dnet.3
++++ b/man/dumbnet.3
+@@ -7,10 +7,10 @@
+ .Dt DNET 3
+ .Os
+ .Sh NAME
+-.Nm dnet
++.Nm dumbnet
+ .Nd dumb networking library
+ .Sh SYNOPSIS
+-.Fd #include <dnet.h>
++.Fd #include <dumbnet.h>
+ .Ss Network addressing
+ .Ft int
+ .Fn addr_cmp "const struct addr *a" "const struct addr *b"
+@@ -846,6 +846,16 @@ return 8, 16, and 32-bit unsigned random values, respectively.
+ All other
+ .Nm
+ routines return 0 on success, or \-1 on failure.
++.Sh COMPATIBILITY
++The library was originally named
++.Xr dnet
++but was renamed to
++.Xr dumbnet
++due to a conflict with the DECnet library. This decision affects not only the
++filename of the shared library, but also the header file names and the library's
++SONAME tag, which means that software built on a non-Debian-derived distribution
++will not run with this library and recompiling the software will only work if
++some adjustments to header include directives and compiler/linker flags are made.
+ .Sh SEE ALSO
+ .Xr pcap 3
+ .Sh AUTHORS
+diff --git a/python/Makefile.am b/python/Makefile.am
+index f4bbdc1..7b02088 100644
+--- a/python/Makefile.am
++++ b/python/Makefile.am
+@@ -13,7 +13,7 @@ python-build:
+ 	touch python-build
+ 
+ python-clean:
+-	rm -rf build dnet.c 
++	rm -rf build dumbnet.c 
+ clean: python-clean
+ 
+ distclean: clean
+@@ -31,6 +31,6 @@ install-exec-local:
+ 
+ endif
+ 
+-EXTRA_DIST = dnet.pyx dnet.c setup.py.in test.py interfacefinder.py
++EXTRA_DIST = dumbnet.pyx dumbnet.c setup.py.in test.py interfacefinder.py
+ 
+ DISTCLEANFILES = *~
+diff --git a/python/dnet.c b/python/dnet.c
+index ca40aea..eb4b81d 100644
+--- a/python/dnet.c
++++ b/python/dnet.c
+@@ -777,7 +777,7 @@ static CYTHON_INLINE float __PYX_NAN() {
+ #define __PYX_HAVE__dnet
+ #define __PYX_HAVE_API__dnet
+ /* Early includes */
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "bsd/string.h"
+ #ifdef _OPENMP
+ #include <omp.h>
+diff --git a/python/dnet.pyx b/python/dumbnet.pyx
+similarity index 99%
+rename from python/dnet.pyx
+rename to python/dumbnet.pyx
+index d9cbc90..c30b868 100644
+--- a/python/dnet.pyx
++++ b/python/dumbnet.pyx
+@@ -19,7 +19,7 @@ __url__ = 'https://github.com/ofalk/libdnet'
+ __version__ = '1.16.2'
+ 
+ 
+-cdef extern from "dnet.h":
++cdef extern from "dumbnet.h":
+     pass
+ 
+ cdef extern from "Python.h":
+diff --git a/python/setup.py.in b/python/setup.py.in
+index 7da2812..08eabd2 100644
+--- a/python/setup.py.in
++++ b/python/setup.py.in
+@@ -4,38 +4,38 @@ import glob, os, sys
+ from setuptools import setup, Extension
+ from Cython.Build import cythonize
+ 
+-dnet_srcs = [ '@srcdir@/dnet.pyx' ]
+-dnet_incdirs = [ '@top_srcdir@/include' ]
+-dnet_libdirs = []
+-dnet_libs = []
+-dnet_extargs = []
+-dnet_extobj = []
++dumbnet_srcs = [ '@srcdir@/dumbnet.pyx' ]
++dumbnet_incdirs = [ '@top_srcdir@/include' ]
++dumbnet_libdirs = []
++dumbnet_libs = []
++dumbnet_extargs = []
++dumbnet_extobj = []
+ 
+ if sys.platform == 'win32':
+     winpcap_dir = '../../WPdpack'
+-    dnet_srcs.extend(['../src/addr-util.c', '../src/addr.c', '../src/blob.c', '../src/ip-util.c', '../src/ip6.c', '../src/rand.c', '../src/err.c', '../src/strlcat.c', '../src/strlcpy.c', '../src/err.c', '../src/strlcat.c', '../src/strlcpy.c', '../src/strsep.c', '../src/arp-win32.c', '../src/eth-win32.c', '../src/fw-pktfilter.c', '../src/intf-win32.c', '../src/ip-win32.c', '../src/route-win32.c', '../src/tun-none.c'])
+-    dnet_incdirs.append(winpcap_dir + '/Include')
+-    dnet_libdirs.append(winpcap_dir + '/Lib')
+-    dnet_libs.extend([ 'advapi32', 'iphlpapi', 'ws2_32', 'packet' ])
++    dumbnet_srcs.extend(['../src/addr-util.c', '../src/addr.c', '../src/blob.c', '../src/ip-util.c', '../src/ip6.c', '../src/rand.c', '../src/err.c', '../src/strlcat.c', '../src/strlcpy.c', '../src/err.c', '../src/strlcat.c', '../src/strlcpy.c', '../src/strsep.c', '../src/arp-win32.c', '../src/eth-win32.c', '../src/fw-pktfilter.c', '../src/intf-win32.c', '../src/ip-win32.c', '../src/route-win32.c', '../src/tun-none.c'])
++    dumbnet_incdirs.append(winpcap_dir + '/Include')
++    dumbnet_libdirs.append(winpcap_dir + '/Lib')
++    dumbnet_libs.extend([ 'advapi32', 'iphlpapi', 'ws2_32', 'packet' ])
+ else:
+     # XXX - can't build on Cygwin+MinGW yet.
+     #if sys.platform == 'cygwin':
+-    #    dnet_extargs.append('-mno-cygwin')
+-    dnet_extobj.extend(sorted(glob.glob('@top_builddir@/src/.libs/*.o')))
++    #    dumbnet_extargs.append('-mno-cygwin')
++    dumbnet_extobj.extend(sorted(glob.glob('@top_builddir@/src/.libs/*.o')))
+ 
+-dnet = Extension('dnet',
+-                 dnet_srcs,
+-                 include_dirs=dnet_incdirs,
+-                 library_dirs=dnet_libdirs,
+-                 libraries=dnet_libs,
+-                 extra_compile_args=dnet_extargs,
+-                 extra_objects=dnet_extobj)
++dumbnet = Extension('dumbnet',
++                 dumbnet_srcs,
++                 include_dirs=dumbnet_incdirs,
++                 library_dirs=dumbnet_libdirs,
++                 libraries=dumbnet_libs,
++                 extra_compile_args=dumbnet_extargs,
++                 extra_objects=dumbnet_extobj)
+ 
+-setup(name='dnet',
++setup(name='dumbnet',
+       version='@VERSION@',
+       description='low-level networking library',
+       author='Dug Song',
+       author_email='dugsong@monkey.org',
+       url='http://libdnet.sourceforge.net/',
+-      ext_modules =cythonize(dnet,compiler_directives = {"c_string_type": "str", 
++      ext_modules =cythonize(dumbnet,compiler_directives = {"c_string_type": "str", 
+         "c_string_encoding":"ascii"}),)
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 65544bc..ede9dba 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -2,12 +2,12 @@
+ 
+ include $(top_srcdir)/Makefile.am.common
+ 
+-lib_LTLIBRARIES = libdnet.la
++lib_LTLIBRARIES = libdumbnet.la
+ 
+ EXTRA_DIST = crc32ct.h
+ 
+-libdnet_la_SOURCES = addr-util.c addr.c blob.c ip-util.c ip6.c rand.c
++libdumbnet_la_SOURCES = addr-util.c addr.c blob.c ip-util.c ip6.c rand.c
+ 
+-libdnet_la_LIBADD = @LTLIBOBJS@
++libdumbnet_la_LIBADD = @LTLIBOBJS@
+ 
+-libdnet_la_LDFLAGS = -version-info 1:2:0
++libdumbnet_la_LDFLAGS = -version-info 1:2:0
+diff --git a/src/addr-util.c b/src/addr-util.c
+index 43cad7b..09f46dd 100644
+--- a/src/addr-util.c
++++ b/src/addr-util.c
+@@ -12,7 +12,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ static const char *octet2dec[] = {
+ 	"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+diff --git a/src/addr.c b/src/addr.c
+index c9f3054..3b38b54 100644
+--- a/src/addr.c
++++ b/src/addr.c
+@@ -28,7 +28,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #ifndef MAXHOSTNAMELEN
+ # define MAXHOSTNAMELEN	256
+diff --git a/src/arp-bsd.c b/src/arp-bsd.c
+index 64d271c..be2c884 100644
+--- a/src/arp-bsd.c
++++ b/src/arp-bsd.c
+@@ -33,7 +33,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct arp_handle {
+ 	int	fd;
+diff --git a/src/arp-ioctl.c b/src/arp-ioctl.c
+index ca47ce9..0c8618e 100644
+--- a/src/arp-ioctl.c
++++ b/src/arp-ioctl.c
+@@ -38,7 +38,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #ifdef HAVE_LINUX_PROCFS
+ #define PROC_ARP_FILE	"/proc/net/arp"
+diff --git a/src/arp-none.c b/src/arp-none.c
+index 51a408f..bf984c6 100644
+--- a/src/arp-none.c
++++ b/src/arp-none.c
+@@ -14,7 +14,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ arp_t *
+ arp_open(void)
+diff --git a/src/arp-win32.c b/src/arp-win32.c
+index 0a01298..3c2a24a 100644
+--- a/src/arp-win32.c
++++ b/src/arp-win32.c
+@@ -15,7 +15,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct arp_handle {
+ 	MIB_IPNETTABLE *iptable;
+diff --git a/src/blob.c b/src/blob.c
+index c0d8450..a5ef64f 100644
+--- a/src/blob.c
++++ b/src/blob.c
+@@ -14,7 +14,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ static void	*(*bl_malloc)(size_t) = malloc;
+ static void	*(*bl_realloc)(void *, size_t) = realloc;
+diff --git a/src/eth-bsd.c b/src/eth-bsd.c
+index d048488..6fd5b2c 100644
+--- a/src/eth-bsd.c
++++ b/src/eth-bsd.c
+@@ -29,7 +29,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct eth_handle {
+ 	int	fd;
+diff --git a/src/eth-dlpi.c b/src/eth-dlpi.c
+index d0d0c14..ddcc184 100644
+--- a/src/eth-dlpi.c
++++ b/src/eth-dlpi.c
+@@ -33,7 +33,7 @@
+ #include <stropts.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #ifndef INFTIM
+ #define INFTIM	-1
+diff --git a/src/eth-linux.c b/src/eth-linux.c
+index 3d46eca..2e8c54a 100644
+--- a/src/eth-linux.c
++++ b/src/eth-linux.c
+@@ -31,7 +31,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct eth_handle {
+ 	int			fd;
+diff --git a/src/eth-ndd.c b/src/eth-ndd.c
+index d68f864..938e037 100644
+--- a/src/eth-ndd.c
++++ b/src/eth-ndd.c
+@@ -20,7 +20,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct eth_handle {
+ 	char	device[16];
+diff --git a/src/eth-none.c b/src/eth-none.c
+index ed4980b..cc684ce 100644
+--- a/src/eth-none.c
++++ b/src/eth-none.c
+@@ -14,7 +14,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ eth_t *
+ eth_open(const char *device)
+diff --git a/src/eth-pfilt.c b/src/eth-pfilt.c
+index a96f99f..709894f 100644
+--- a/src/eth-pfilt.c
++++ b/src/eth-pfilt.c
+@@ -22,7 +22,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct eth_handle {
+ 	int	fd;
+diff --git a/src/eth-snoop.c b/src/eth-snoop.c
+index 3f7a709..1b55ed2 100644
+--- a/src/eth-snoop.c
++++ b/src/eth-snoop.c
+@@ -20,7 +20,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct eth_handle {
+ 	int		fd;
+diff --git a/src/eth-win32.c b/src/eth-win32.c
+index c324529..fb27779 100644
+--- a/src/eth-win32.c
++++ b/src/eth-win32.c
+@@ -17,7 +17,7 @@
+ #include <errno.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct eth_handle {
+ 	LPADAPTER	 lpa;
+diff --git a/src/fw-ipchains.c b/src/fw-ipchains.c
+index 00c5b38..64cfcdb 100644
+--- a/src/fw-ipchains.c
++++ b/src/fw-ipchains.c
+@@ -33,7 +33,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #define PROC_IPCHAINS_FILE	"/proc/net/ip_fwchains"
+ 
+diff --git a/src/fw-ipf.c b/src/fw-ipf.c
+index 19f0928..ff5c734 100644
+--- a/src/fw-ipf.c
++++ b/src/fw-ipf.c
+@@ -36,7 +36,7 @@
+ 
+ #define KMEM_NAME	"/dev/kmem"
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #if !defined(fi_saddr) && !defined(fi_daddr)
+ # define fi_saddr	fi_src.s_addr
+diff --git a/src/fw-ipfw.c b/src/fw-ipfw.c
+index 5de6eff..50e7d89 100644
+--- a/src/fw-ipfw.c
++++ b/src/fw-ipfw.c
+@@ -23,7 +23,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct fw_handle {
+ 	int	fd;
+diff --git a/src/fw-none.c b/src/fw-none.c
+index e6b9fa3..3018bce 100644
+--- a/src/fw-none.c
++++ b/src/fw-none.c
+@@ -12,7 +12,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ fw_t *
+ fw_open(void)
+diff --git a/src/fw-pf.c b/src/fw-pf.c
+index e209e24..2438de9 100644
+--- a/src/fw-pf.c
++++ b/src/fw-pf.c
+@@ -24,7 +24,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ /*
+  * XXX - cope with moving pf API
+diff --git a/src/fw-pktfilter.c b/src/fw-pktfilter.c
+index d378d7a..815068a 100644
+--- a/src/fw-pktfilter.c
++++ b/src/fw-pktfilter.c
+@@ -17,7 +17,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #define PKTFILTER_PIPE "\\\\.\\pipe\\PktFltPipe"	
+ #define MAX_RULE_LENGTH 256
+diff --git a/src/intf-win32.c b/src/intf-win32.c
+index eb804f3..a0f140b 100644
+--- a/src/intf-win32.c
++++ b/src/intf-win32.c
+@@ -16,7 +16,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct ifcombo {
+ 	DWORD		*idx;
+diff --git a/src/intf.c b/src/intf.c
+index 429ec51..7a81034 100644
+--- a/src/intf.c
++++ b/src/intf.c
+@@ -39,7 +39,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ /* XXX - Tru64 */
+ #if defined(SIOCRIPMTU) && defined(SIOCSIPMTU)
+diff --git a/src/ip-cooked.c b/src/ip-cooked.c
+index 5455f7d..9217845 100644
+--- a/src/ip-cooked.c
++++ b/src/ip-cooked.c
+@@ -17,7 +17,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "queue.h"
+ 
+ struct ip_intf {
+diff --git a/src/ip-util.c b/src/ip-util.c
+index 7cbe44d..c7afc7e 100644
+--- a/src/ip-util.c
++++ b/src/ip-util.c
+@@ -12,7 +12,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "crc32ct.h"
+ 
+ /* CRC-32C (Castagnoli). Public domain. */
+diff --git a/src/ip-win32.c b/src/ip-win32.c
+index f1bba07..b8b922b 100644
+--- a/src/ip-win32.c
++++ b/src/ip-win32.c
+@@ -13,7 +13,7 @@
+ #include <errno.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct ip_handle {
+ 	WSADATA			wsdata;
+diff --git a/src/ip.c b/src/ip.c
+index d5940a6..4dbeecc 100644
+--- a/src/ip.c
++++ b/src/ip.c
+@@ -16,7 +16,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct ip_handle {
+ 	int	fd;
+diff --git a/src/ip6.c b/src/ip6.c
+index 2618a0b..4efa40b 100644
+--- a/src/ip6.c
++++ b/src/ip6.c
+@@ -8,7 +8,7 @@
+ 
+ #include "config.h"
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include <string.h>
+ #include <errno.h>
+ 
+diff --git a/src/ndisc-linux.c b/src/ndisc-linux.c
+index 1923ed1..b1cb975 100644
+--- a/src/ndisc-linux.c
++++ b/src/ndisc-linux.c
+@@ -26,7 +26,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct ndisc_handle
+ {
+diff --git a/src/ndisc-none.c b/src/ndisc-none.c
+index 9ed03a5..643e564 100644
+--- a/src/ndisc-none.c
++++ b/src/ndisc-none.c
+@@ -11,7 +11,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ ndisc_t *
+ ndisc_open(void)
+diff --git a/src/rand.c b/src/rand.c
+index 38fa911..5b6f761 100644
+--- a/src/rand.c
++++ b/src/rand.c
+@@ -26,7 +26,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct rand_handle {
+ 	uint8_t		 i;
+diff --git a/src/route-bsd.c b/src/route-bsd.c
+index 88fbd8f..a3073c7 100644
+--- a/src/route-bsd.c
++++ b/src/route-bsd.c
+@@ -41,7 +41,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #define ROUNDUP(a) \
+ 	((a) > 0 ? (1 + (((a) - 1) | (sizeof(long) - 1))) : sizeof(long))
+diff --git a/src/route-hpux.c b/src/route-hpux.c
+index b68ea92..cf01ed6 100644
+--- a/src/route-hpux.c
++++ b/src/route-hpux.c
+@@ -21,7 +21,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #define ADDR_ISHOST(a)	(((a)->addr_type == ADDR_TYPE_IP &&	\
+ 			  (a)->addr_bits == IP_ADDR_BITS) ||	\
+diff --git a/src/route-linux.c b/src/route-linux.c
+index 45b5c2e..d5d2938 100644
+--- a/src/route-linux.c
++++ b/src/route-linux.c
+@@ -27,7 +27,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #define ADDR_ISHOST(a)	(((a)->addr_type == ADDR_TYPE_IP &&	\
+ 			  (a)->addr_bits == IP_ADDR_BITS) ||	\
+diff --git a/src/route-none.c b/src/route-none.c
+index 5772e67..cd640d5 100644
+--- a/src/route-none.c
++++ b/src/route-none.c
+@@ -14,7 +14,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ route_t *
+ route_open(void)
+diff --git a/src/route-win32.c b/src/route-win32.c
+index ff04e58..1b66453 100644
+--- a/src/route-win32.c
++++ b/src/route-win32.c
+@@ -15,7 +15,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct route_handle {
+ 	MIB_IPFORWARDTABLE *ipftable;
+diff --git a/src/tun-bsd.c b/src/tun-bsd.c
+index b6613f7..6be48db 100644
+--- a/src/tun-bsd.c
++++ b/src/tun-bsd.c
+@@ -18,7 +18,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct tun {
+ 	int               fd;
+diff --git a/src/tun-linux.c b/src/tun-linux.c
+index eb89755..c797962 100644
+--- a/src/tun-linux.c
++++ b/src/tun-linux.c
+@@ -24,7 +24,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ struct tun {
+ 	int fd;
+diff --git a/src/tun-none.c b/src/tun-none.c
+index e9ab12a..1054d91 100644
+--- a/src/tun-none.c
++++ b/src/tun-none.c
+@@ -14,7 +14,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ tun_t *
+ tun_open(struct addr *src, struct addr *dst, int mtu)
+diff --git a/src/tun-solaris.c b/src/tun-solaris.c
+index 3fae850..1fd1712 100644
+--- a/src/tun-solaris.c
++++ b/src/tun-solaris.c
+@@ -24,7 +24,7 @@
+ #include <stropts.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ 
+ #define DEV_TUN		"/dev/tun"
+ #define DEV_IP		"/dev/ip"
+diff --git a/test/Makefile.am b/test/Makefile.am
+index 392d7c5..ddd54d1 100644
+--- a/test/Makefile.am
++++ b/test/Makefile.am
+@@ -2,5 +2,5 @@
+ 
+ include $(top_srcdir)/Makefile.am.common
+ 
+-SUBDIRS = check dnet
++SUBDIRS = check dumbnet
+ 
+diff --git a/test/check/Makefile.am b/test/check/Makefile.am
+index 07b0c47..bf86869 100644
+--- a/test/check/Makefile.am
++++ b/test/check/Makefile.am
+@@ -23,4 +23,4 @@ check_ip_SOURCES = check_ip.c
+ check_rand_SOURCES = check_rand.c
+ check_route_SOURCES = check_route.c
+ 
+-LDADD = $(top_builddir)/src/libdnet.la @CHECKLIB@
++LDADD = $(top_builddir)/src/libdumbnet.la @CHECKLIB@
+diff --git a/test/check/check_addr.c b/test/check/check_addr.c
+index 7fbfe95..fb3ca3e 100644
+--- a/test/check/check_addr.c
++++ b/test/check/check_addr.c
+@@ -7,7 +7,7 @@
+ #include <netinet/in.h>
+ #include <arpa/inet.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_arp.c b/test/check/check_arp.c
+index 85f2bbd..afdf2cf 100644
+--- a/test/check/check_arp.c
++++ b/test/check/check_arp.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_blob.c b/test/check/check_blob.c
+index 72931cb..fc2be26 100644
+--- a/test/check/check_blob.c
++++ b/test/check/check_blob.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_eth.c b/test/check/check_eth.c
+index cc6d0fa..1857f63 100644
+--- a/test/check/check_eth.c
++++ b/test/check/check_eth.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_fw.c b/test/check/check_fw.c
+index 3c92f2d..5985587 100644
+--- a/test/check/check_fw.c
++++ b/test/check/check_fw.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_intf.c b/test/check/check_intf.c
+index fa1b329..a853b34 100644
+--- a/test/check/check_intf.c
++++ b/test/check/check_intf.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_ip.c b/test/check/check_ip.c
+index 5428644..bad0ffa 100644
+--- a/test/check/check_ip.c
++++ b/test/check/check_ip.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_rand.c b/test/check/check_rand.c
+index 08f74eb..48d470c 100644
+--- a/test/check/check_rand.c
++++ b/test/check/check_rand.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/check/check_route.c b/test/check/check_route.c
+index 73a8491..73b463a 100644
+--- a/test/check/check_route.c
++++ b/test/check/check_route.c
+@@ -1,7 +1,7 @@
+ 
+ #include <sys/types.h>
+ 
+-#include <dnet.h>
++#include <dumbnet.h>
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/test/dnet/Makefile.am b/test/dnet/Makefile.am
+deleted file mode 100644
+index 2c5f553..0000000
+--- a/test/dnet/Makefile.am
++++ /dev/null
+@@ -1,18 +0,0 @@
+-## $Id$
+-
+-include $(top_srcdir)/Makefile.am.common
+-
+-sbin_PROGRAMS = dnet
+-
+-dnet_SOURCES = addr.c arp.c aton.c aton.h dnet.c eth.c fw.c hex.c \
+-	icmp.c intf.c ip.c mod.h rand.c route.c send.c tcp.c udp.c
+-
+-man_MANS = dnet.8
+-
+-EXTRA_DIST = $(man_MANS)
+-
+-dnet_LDADD = $(top_builddir)/src/libdnet.la
+-
+-dnet.8.txt: dnet.8
+-	groff -t -e -mdoc -Tascii dnet.8 | col -bx > $@
+-
+diff --git a/test/dumbnet/Makefile.am b/test/dumbnet/Makefile.am
+new file mode 100644
+index 0000000..0200c05
+--- /dev/null
++++ b/test/dumbnet/Makefile.am
+@@ -0,0 +1,18 @@
++## $Id$
++
++include $(top_srcdir)/Makefile.am.common
++
++sbin_PROGRAMS = dumbnet
++
++dumbnet_SOURCES = addr.c arp.c aton.c aton.h dumbnet.c eth.c fw.c hex.c \
++	icmp.c intf.c ip.c mod.h rand.c route.c send.c tcp.c udp.c
++
++man_MANS = dumbnet.8
++
++EXTRA_DIST = $(man_MANS)
++
++dumbnet_LDADD = $(top_builddir)/src/libdumbnet.la
++
++dumbnet.8.txt: dumbnet.8
++	groff -t -e -mdoc -Tascii dumbnet.8 | col -bx > $@
++
+diff --git a/test/dnet/Makefile.in b/test/dumbnet/Makefile.in
+similarity index 100%
+rename from test/dnet/Makefile.in
+rename to test/dumbnet/Makefile.in
+diff --git a/test/dnet/addr.c b/test/dumbnet/addr.c
+similarity index 97%
+rename from test/dnet/addr.c
+rename to test/dumbnet/addr.c
+index 1c44e34..a1853df 100644
+--- a/test/dnet/addr.c
++++ b/test/dumbnet/addr.c
+@@ -15,7 +15,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "mod.h"
+ 
+ void
+diff --git a/test/dnet/arp.c b/test/dumbnet/arp.c
+similarity index 99%
+rename from test/dnet/arp.c
+rename to test/dumbnet/arp.c
+index 067c120..c7b972f 100644
+--- a/test/dnet/arp.c
++++ b/test/dumbnet/arp.c
+@@ -17,7 +17,7 @@
+ #include <time.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 
+diff --git a/test/dnet/aton.c b/test/dumbnet/aton.c
+similarity index 99%
+rename from test/dnet/aton.c
+rename to test/dumbnet/aton.c
+index 97e05c4..99c2517 100644
+--- a/test/dnet/aton.c
++++ b/test/dumbnet/aton.c
+@@ -16,7 +16,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ 
+ int
+diff --git a/test/dnet/aton.h b/test/dumbnet/aton.h
+similarity index 100%
+rename from test/dnet/aton.h
+rename to test/dumbnet/aton.h
+diff --git a/test/dnet/dnet.8 b/test/dumbnet/dumbnet.8
+similarity index 82%
+rename from test/dnet/dnet.8
+rename to test/dumbnet/dumbnet.8
+index bc1dcd4..7781234 100644
+--- a/test/dnet/dnet.8
++++ b/test/dumbnet/dumbnet.8
+@@ -6,14 +6,14 @@
+ .Dt DNET 8
+ .Os
+ .Sh NAME
+-.Nm dnet
++.Nm dumbnet
+ .Nd dumb networking library test program
+ .Sh SYNOPSIS
+-.Nm dnet Ar command Ar args Op ...
++.Nm dumbnet Ar command Ar args Op ...
+ .Sh DESCRIPTION
+ .Nm
+ is a simple test program for the
+-.Xr dnet 3
++.Xr dumbnet 3
+ library. It can be used to compose and transmit network datagrams as a
+ Unix-style filter (e.g. reading from or writing to files and pipes) or
+ modify the local system network configuration (including the ARP
+@@ -219,26 +219,26 @@ Delete the route for the destination
+ .Sh EXAMPLES
+ Send a UDP datagram containing random shellcode:
+ .Bd -literal -offset indent
+-dnet hex "\\xeb\\x1f\\x5e\\x89\\x76\\x08\\x31\\xc0\\x88\\x46\\x07\\x89" \\
++dumbnet hex "\\xeb\\x1f\\x5e\\x89\\x76\\x08\\x31\\xc0\\x88\\x46\\x07\\x89" \\
+ "\\x46\\x0c\\xb0\\x0b\\x89\\xf3\\x8d\\x4e\\x08\\x8d\\x56\\x0c\\xcd\\x80" \\
+ "\\x31\\xdb\\x89\\xd8\\x40\\xcd\\x80\\xe8\\xdc\\xff\\xff\\xff/bin/sh" | \\
+-dnet udp sport 555 dport 666 | \\
+-dnet ip proto udp src 1.2.3.4 dst 5.6.7.8 | dnet send
++dumbnet udp sport 555 dport 666 | \\
++dumbnet ip proto udp src 1.2.3.4 dst 5.6.7.8 | dumbnet send
+ .Ed
+ .Pp
+ Save an ARP request in a file and send it twice:
+ .Bd -literal -offset indent
+-dnet arp op req sha 0:d:e:a:d:0 spa 10.0.0.3 tpa 10.0.0.4 | \\
+-dnet eth type arp src 0:d:e:a:d:0 dst ff:ff:ff:ff:ff:ff > arp.pkt
+-dnet send fxp0 < arp.pkt
+-dnet send fxp0 < arp.pkt
++dumbnet arp op req sha 0:d:e:a:d:0 spa 10.0.0.3 tpa 10.0.0.4 | \\
++dumbnet eth type arp src 0:d:e:a:d:0 dst ff:ff:ff:ff:ff:ff > arp.pkt
++dumbnet send fxp0 < arp.pkt
++dumbnet send fxp0 < arp.pkt
+ .Ed
+ .Pp
+ Send a fragmented ping packet:
+ .Bd -literal -offset indent
+ # Create ping packet with IP header, to set ICMP checksum
+-echo "monkey monkey monkey monkey" | dnet icmp type 8 code 0 | \\
+-dnet ip proto icmp src 1.2.3.4 dst 5.6.7.8 > ping.pkt
++echo "monkey monkey monkey monkey" | dumbnet icmp type 8 code 0 | \\
++dumbnet ip proto icmp src 1.2.3.4 dst 5.6.7.8 > ping.pkt
+ 
+ # Chop off IP header
+ dd if=ping.pkt of=ping.data bs=20 skip=1
+@@ -247,13 +247,23 @@ dd if=ping.pkt of=ping.data bs=20 skip=1
+ split \-b 24 ping.data p.
+ 
+ # Send fragments
+-dnet ip id 1 off 0+ proto icmp src 1.2.3.4 dst 5.6.7.8 < p.aa | \\
+-dnet send
+-dnet ip id 1 off 24 proto icmp src 1.2.3.4 dst 5.6.7.8 < p.ab | \\
+-dnet send
++dumbnet ip id 1 off 0+ proto icmp src 1.2.3.4 dst 5.6.7.8 < p.aa | \\
++dumbnet send
++dumbnet ip id 1 off 24 proto icmp src 1.2.3.4 dst 5.6.7.8 < p.ab | \\
++dumbnet send
+ .Ed
++.Sh COMPATIBILITY
++The library was originally named
++.Xr dnet
++but was renamed to
++.Xr dumbnet
++due to a conflict with the DECnet library. This decision affects not only the
++filename of the shared library, but also the header file names and the library's
++SONAME tag, which means that software built on a non-Debian-derived distribution
++will not run with this library and recompiling the software will only work if
++some adjustments to header include directives and compiler/linker flags are made.
+ .Sh SEE ALSO
+-.Xr dnet 3
++.Xr dumbnet 3
+ .Sh AUTHORS
+ Dug Song
+ .Aq dugsong@monkey.org
+diff --git a/test/dnet/dnet.c b/test/dumbnet/dumbnet.c
+similarity index 98%
+rename from test/dnet/dnet.c
+rename to test/dumbnet/dumbnet.c
+index 5ebcba3..f73b568 100644
+--- a/test/dnet/dnet.c
++++ b/test/dumbnet/dumbnet.c
+@@ -16,7 +16,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "mod.h"
+ 
+ /*
+diff --git a/test/dnet/eth.c b/test/dumbnet/eth.c
+similarity index 98%
+rename from test/dnet/eth.c
+rename to test/dumbnet/eth.c
+index 5c2688d..e8396fc 100644
+--- a/test/dnet/eth.c
++++ b/test/dumbnet/eth.c
+@@ -16,7 +16,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 
+diff --git a/test/dnet/fw.c b/test/dumbnet/fw.c
+similarity index 99%
+rename from test/dnet/fw.c
+rename to test/dumbnet/fw.c
+index a948c48..b494715 100644
+--- a/test/dnet/fw.c
++++ b/test/dumbnet/fw.c
+@@ -17,7 +17,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "mod.h"
+ 
+ static void
+diff --git a/test/dnet/hex.c b/test/dumbnet/hex.c
+similarity index 97%
+rename from test/dnet/hex.c
+rename to test/dumbnet/hex.c
+index 79e0226..005e814 100644
+--- a/test/dnet/hex.c
++++ b/test/dumbnet/hex.c
+@@ -15,7 +15,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 
+diff --git a/test/dnet/icmp.c b/test/dumbnet/icmp.c
+similarity index 98%
+rename from test/dnet/icmp.c
+rename to test/dumbnet/icmp.c
+index 3207c83..e89a59d 100644
+--- a/test/dnet/icmp.c
++++ b/test/dumbnet/icmp.c
+@@ -16,7 +16,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 
+diff --git a/test/dnet/intf.c b/test/dumbnet/intf.c
+similarity index 99%
+rename from test/dnet/intf.c
+rename to test/dumbnet/intf.c
+index 3c9f6a7..a4296c1 100644
+--- a/test/dnet/intf.c
++++ b/test/dumbnet/intf.c
+@@ -17,7 +17,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "mod.h"
+ 
+ static intf_t	*intf;
+diff --git a/test/dnet/ip.c b/test/dumbnet/ip.c
+similarity index 98%
+rename from test/dnet/ip.c
+rename to test/dumbnet/ip.c
+index 3c60d7f..ac5fa33 100644
+--- a/test/dnet/ip.c
++++ b/test/dumbnet/ip.c
+@@ -17,7 +17,7 @@
+ #include <time.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 
+diff --git a/test/dnet/mod.h b/test/dumbnet/mod.h
+similarity index 100%
+rename from test/dnet/mod.h
+rename to test/dumbnet/mod.h
+diff --git a/test/dnet/rand.c b/test/dumbnet/rand.c
+similarity index 97%
+rename from test/dnet/rand.c
+rename to test/dumbnet/rand.c
+index 51820e4..fd583a6 100644
+--- a/test/dnet/rand.c
++++ b/test/dumbnet/rand.c
+@@ -15,7 +15,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "mod.h"
+ 
+ void
+diff --git a/test/dnet/route.c b/test/dumbnet/route.c
+similarity index 99%
+rename from test/dnet/route.c
+rename to test/dumbnet/route.c
+index 36d1b91..cf1a09d 100644
+--- a/test/dnet/route.c
++++ b/test/dumbnet/route.c
+@@ -17,7 +17,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "mod.h"
+ 
+ static void
+diff --git a/test/dnet/send.c b/test/dumbnet/send.c
+similarity index 98%
+rename from test/dnet/send.c
+rename to test/dumbnet/send.c
+index 78cbbc0..f5fa557 100644
+--- a/test/dnet/send.c
++++ b/test/dumbnet/send.c
+@@ -17,7 +17,7 @@
+ #include <time.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 
+diff --git a/test/dnet/tcp.c b/test/dumbnet/tcp.c
+similarity index 98%
+rename from test/dnet/tcp.c
+rename to test/dumbnet/tcp.c
+index a724a9e..a1f9288 100644
+--- a/test/dnet/tcp.c
++++ b/test/dumbnet/tcp.c
+@@ -17,7 +17,7 @@
+ #include <time.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 
+diff --git a/test/dnet/udp.c b/test/dumbnet/udp.c
+similarity index 98%
+rename from test/dnet/udp.c
+rename to test/dumbnet/udp.c
+index ab2fdea..b2302fc 100644
+--- a/test/dnet/udp.c
++++ b/test/dumbnet/udp.c
+@@ -17,7 +17,7 @@
+ #include <time.h>
+ #include <unistd.h>
+ 
+-#include "dnet.h"
++#include "dumbnet.h"
+ #include "aton.h"
+ #include "mod.h"
+ 

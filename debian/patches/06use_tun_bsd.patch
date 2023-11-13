@@ -1,0 +1,24 @@
+Description: The existence of <stropts.h> is no discerning criterion between
+  Solaris and BSD. Debian is only concerned with BSD, so choose that.
+Author: hesso@pool.math.tu-berlin.de
+Origin: vendor
+Last-Update: 2022-05-04
+Forwarded: not-needed
+
+Index: libdumbnet/configure.ac
+===================================================================
+--- libdumbnet.orig/configure.ac
++++ libdumbnet/configure.ac
+@@ -315,11 +315,7 @@ dnl Check for tun interface.
+ if test "$ac_cv_header_linux_if_tun_h" = yes ; then
+ 	AC_LIBOBJ([tun-linux])
+ elif test "$ac_cv_header_net_if_tun_h" = yes ; then
+-	if test "$ac_cv_header_stropts_h" = yes ; then
+-		AC_LIBOBJ([tun-solaris])
+-	else
+-		AC_LIBOBJ([tun-bsd])
+-	fi
++	AC_LIBOBJ([tun-bsd])
+ elif test -c "/dev/tun0" ; then
+ 	AC_LIBOBJ([tun-bsd])
+ else

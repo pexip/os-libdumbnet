@@ -1,0 +1,5 @@
+# 01rename_library.sh.dpatch
+01rename_library.patch
+06use_tun_bsd.patch
+07noconfig-script-multiarch-path.patch
+empty-line-in-manpages.patch

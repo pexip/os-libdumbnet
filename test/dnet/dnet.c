@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: dnet.c 317 2002-03-29 06:07:49Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

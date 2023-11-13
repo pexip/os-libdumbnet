@@ -41,11 +41,11 @@ if [ -n "$2" ]; then
   cd "$2"
 fi
 
-for MF in $(find . -name Makefile.am -or -name "*.[38]" -or -name "setup.py.in" -or -name "*-config.in"); do
+for MF in $(find . -name Makefile.am -or -name "*.[38]" -or -name "setup.py.in" -or -name "*-config.in" | grep -v -e '^\./\.git/'); do
   sed -i -e "s/${OLD_NAME}/${NEW_NAME}/g" $MF
 done
 
-for CF in $(find . -name "*.c" -or -name "*.h"); do
+for CF in $(find . -name "*.c" -or -name "*.h" | grep -v -e '^\./debian/tests/'); do
   sed -i -e "s/#include \"${OLD_NAME}\.h\"/#include \"${NEW_NAME}.h\"/" \
          -e "s/#include <${OLD_NAME}\.h>/#include <${NEW_NAME}.h>/" \
          -e "s/#include <${OLD_NAME}\//#include <${NEW_NAME}\//" $CF
@@ -54,22 +54,21 @@ done
 sed -i -e "s/\"${OLD_NAME}\.h\"/\"${NEW_NAME}.h\"/" python/*.pyx
 
 sed -i -e "/^AC_INIT/ s/${OLD_NAME}/${NEW_NAME}/g" \
-       -e "/^AM_INIT_/ s/${OLD_NAME}/${NEW_NAME}/g" \
        -e "/^AC_OUTPUT/,$ s/${OLD_NAME}/${NEW_NAME}/g" \
-  configure.in
+  configure.ac
 
 if [ "$DIR" = 1 ]; then
   for (( i=0; i<${#OLD_RENAME_FILES[*]}; i++ )); do
     [ -e ${NEW_RENAME_FILES[$i]} ] || mv ${OLD_RENAME_FILES[$i]} ${NEW_RENAME_FILES[$i]}
   done
-  for P in $(find . -name "*.[38]"); do
+  for P in $(find . -name "*.[38]" | grep -v -e '^\./\.git/'); do
     sed -i -e "/^\.Sh SEE ALSO/ i$MANPAGENOTE" $P
   done
 else
   for (( i=${#OLD_RENAME_FILES[*]}-1; i>=0; i-- )); do
     [ -e ${OLD_RENAME_FILES[$i]} ] || mv ${NEW_RENAME_FILES[$i]} ${OLD_RENAME_FILES[$i]}
   done
-  for P in $(find . -name "*.[38]"); do
+  for P in $(find . -name "*.[38]" | grep -v -e '^\./\.git/'); do
     sed -i -e "/^\.Sh COMPATIBILITY/,+9 d" $P
   done
 fi

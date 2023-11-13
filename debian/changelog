@@ -1,3 +1,94 @@
+libdumbnet (1.16.3-1) unstable; urgency=medium
+
+  * [8e0a34e] New upstream version 1.16.3
+  * [6cef3b8] debian/patches/: refresh where needed
+
+ -- Florian Ernst <florian@debian.org>  Thu, 12 Jan 2023 17:38:28 +0100
+
+libdumbnet (1.16.2-1) unstable; urgency=medium
+
+  * [e197b3c] New upstream version 1.16.2
+  * [751ed7a] debian/copyright: update years
+  * [8eaba43] debian/patches/: refresh where needed
+  * [086cf9b] debian/control: Standards-Version: 4.6.2 (no changes required)
+
+ -- Florian Ernst <florian@debian.org>  Wed, 04 Jan 2023 10:59:27 +0100
+
+libdumbnet (1.16.1-2) unstable; urgency=medium
+
+  * [ddb03b4] fix FTBFS on GNU/Hurd by omitting some symbols.
+    Thanks to Svante Signell (Closes: 1021260)
+  * [a5b35a7] debian/control: Standards-Version: 4.6.1.0 (no changes required)
+
+ -- Florian Ernst <florian@debian.org>  Tue, 04 Oct 2022 19:03:05 +0200
+
+libdumbnet (1.16.1-1) unstable; urgency=medium
+
+  * [2f3fbc4] New upstream version 1.16
+    * Removes local version of strl* and strsep (Closes: #749003)
+  * [001cc11] New upstream version 1.16.1
+  * [5b5c3e8] debian/copyright: update for new upstream release
+  * [caa656b] debian/patches/: drop those now applied upstream
+  * [b5d0df1] debian/patches/: refresh remaining files
+  * [ba9c728] debian/libdumbnet1.symbols: update for new upstream
+  * [22eaf3e] debian/patches/empty-line-in-manpages.patch: added fixing
+    the manpages
+
+ -- Florian Ernst <florian@debian.org>  Wed, 04 May 2022 21:17:06 +0200
+
+libdumbnet (1.14-2) unstable; urgency=medium
+
+  * [3204204] rely on pkg-config to detect "check" lib during build
+  * [62641db] enable gitlab-ci on Salsa
+  * [21da070] activate Salsa pipeline
+  * [57d2f1b] debian/tests/: add simple autopkgtest test
+  * [52fb455] default to verbose dh for better debuggability
+
+ -- Florian Ernst <florian@debian.org>  Sat, 12 Mar 2022 15:22:34 +0100
+
+libdumbnet (1.14-1) unstable; urgency=medium
+
+  * [8738c08] New upstream version 1.14
+    http://code.google.com/p/libdnet/ was migrated to
+    https://github.com/dugsong/libdnet which in turn now redirects to
+    https://github.com/ofalk/libdnet
+  * [58c2ec8] debian/{control,copyright,watch}: update upstream homepage
+  * [08a27ac] debian/README.Debian: drop now-obsolete note about upstream
+    homepage
+  * [e97d606] debian/patches/01rename_library.patch: update for new upstream
+    release.
+    For that debian/patches/01rename_library.sh.dpatch was salvaged from
+    1.12-9, slightly adjusted for the new release and then used to generate
+    the new patch.
+  * [b95a8d9] refresh remaining patches, forward where needed, and supply
+    DEP-3 headers
+  * [20b2fa1] debian/patches/08typos.patch: added, fixing some common typos
+  * [7c1d4aa] debian/copyright: redo machine-readable
+  * [521907e] debian/copyright: also add BSD-4-clause License block
+  * [b41e78e] debian/libdumbnet-dev.docs: follow upstream's README to
+    README.md
+  * [0f67980] debian/upstream/metadata: added
+  * [411c9c5] debian/libdumbnet1.symbols: add Build-Depends-Package
+  * [1204558] debian/changelog: trim trailing whitespace
+  * [fc10881] debian/rules: enable all hardening options
+  * [5efc1b2] debian/control: add Vcs-* pointing to salsa
+  * [9f14f81] debian/control: new maintainer (Closes: #698982)
+
+ -- Florian Ernst <florian@debian.org>  Sun, 27 Feb 2022 13:21:44 +0100
+
+libdumbnet (1.12-10) unstable; urgency=medium
+
+  * QA upload
+  * debian/:
+    * Replace dpatch with quilt and convert to 3.0 (quilt) source format
+    * Rewrite debian/rules as short-form dh with debhelper compat 13
+  * debian/control:
+    * Remove obsolete Pre-Depends
+    * Bump Standards-Version to 4.6.0
+  * debian/*.{postinst,postrm,preinst}: Removed, no longer needed
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 09 Jan 2022 19:26:17 +0100
+
 libdumbnet (1.12-9pexip3) pexip-bullseye; urgency=medium
 
   * Bullseye rebuild for ARM64 inclusion
@@ -263,4 +354,3 @@ libdumbnet (1.5-1) unstable; urgency=low
   * Makefile.am: Set SONAME to 0.0.0
 
  -- Simon Law <sfllaw@debian.org>  Sat, 28 Sep 2002 12:23:08 -0400
-

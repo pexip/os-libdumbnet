@@ -4,7 +4,7 @@
  * Copyright (c) 2002 Dug Song <dugsong@monkey.org>
  * Copyright (c) 2001 Jean-Baptiste Marchand, Hervé Schauer Consultants.  
  *
- * $Id: fw-pktfilter.c 587 2005-02-15 06:37:07Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Dug Song <dugsong@monkey.org>
  *
- * $Id: aton.h 274 2002-02-08 07:26:58Z dugsong $
+ * $Id$
  */
 
 #ifndef ATON_H

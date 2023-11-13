@@ -2,8 +2,9 @@
  * fw.c
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
+ * Copyright (c) 2020 Oliver Falk <oliver@linux-kernel.at>
  *
- * $Id: fw.c 577 2005-02-14 20:45:04Z dugsong $
+ * $Id$
  */
 
 #include "config.h"
@@ -33,7 +34,7 @@ static int
 print_rule(const struct fw_rule *fr, void *arg)
 {
 	struct protoent *pr;
-	char proto[16], sport[16], dport[16], typecode[16];
+	char proto[16], sport[32], dport[32], typecode[16];
 
 	if (fr->fw_proto == 0)
 		proto[0] = '\0';
@@ -99,7 +100,7 @@ arg_to_fr(int argc, char *argv[], struct fw_rule *fr)
 	fr->fw_dir = strcmp(argv[1], "in") ? FW_DIR_OUT : FW_DIR_IN;
 
 	if (strcmp(argv[2], "any") != 0)
-		strlcpy(fr->fw_device, argv[2], sizeof(fr->fw_device));
+		strncpy(fr->fw_device, argv[2], sizeof(fr->fw_device)-1);
 	
 	if ((pr = getprotobyname(argv[3])) != NULL)
 		fr->fw_proto = pr->p_proto;
@@ -108,7 +109,7 @@ arg_to_fr(int argc, char *argv[], struct fw_rule *fr)
 
 	p = strtok(argv[4], ":");
 	
-	if (addr_aton(p, &fr->fw_src) < 0)
+	if (!p || addr_aton(p, &fr->fw_src) < 0)
 		return (-1);
 
 	if ((p = strtok(NULL, ":")) != NULL) {

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: arp-ioctl.c 554 2005-02-09 22:31:00Z dugsong $
+ * $Id$
  */
 
 #include "config.h"
@@ -210,7 +210,7 @@ arp_loop(arp_t *a, arp_handler callback, void *arg)
 {
 	FILE *fp;
 	struct arp_entry entry;
-	char buf[BUFSIZ], ipbuf[100], macbuf[100], maskbuf[100], devbuf[100];
+	char buf[BUFSIZ], ipbuf[101], macbuf[101], maskbuf[101], devbuf[101];
 	int i, type, flags, ret;
 
 	if ((fp = fopen(PROC_ARP_FILE, "r")) == NULL)
@@ -383,7 +383,7 @@ arp_loop(arp_t *r, arp_handler callback, void *arg)
 	}
 	return (ret);
 }
-#elif defined(HAVE_NET_RADIX_H)
+#elif defined(HAVE_NET_RADIX_H) && !defined(_AIX)
 /* XXX - Tru64, others? */
 #include <netinet/if_ether.h>
 #include <nlist.h>

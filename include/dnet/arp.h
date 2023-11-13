@@ -6,7 +6,7 @@
  *
  * Copyright (c) 2000 Dug Song <dugsong@monkey.org>
  *
- * $Id: arp.h 416 2003-03-16 17:39:18Z dugsong $
+ * $Id$
  */
 
 #ifndef DNET_ARP_H
@@ -16,7 +16,9 @@
 #define ARP_ETHIP_LEN	20	/* base ARP message length */
 
 #ifndef __GNUC__
-# define __attribute__(x)
+# ifndef __attribute__
+#  define __attribute__(x)
+# endif
 # pragma pack(1)
 #endif
 

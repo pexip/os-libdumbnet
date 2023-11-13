@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2001 Dug Song <dugsong@monkey.org>
  *
- * $Id: intf.c 473 2004-01-13 06:51:56Z dugsong $
+ * $Id$
  */
 
 #include "config.h"

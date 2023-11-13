@@ -1,4 +1,4 @@
-## $Id: Makefile.am 427 2003-03-28 06:02:44Z dugsong $
+## $Id$
 
 include $(top_srcdir)/Makefile.am.common
 

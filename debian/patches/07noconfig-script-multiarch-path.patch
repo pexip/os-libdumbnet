@@ -1,0 +1,19 @@
+Description: noconfig-script-multiarch-path
+Author: hesso@pool.math.tu-berlin.de
+Origin: vendor
+Last-Update: 2022-02-26
+Forwarded: not-needed
+
+Index: libdumbnet/dumbnet-config.in
+===================================================================
+--- libdumbnet.orig/dumbnet-config.in
++++ libdumbnet/dumbnet-config.in
+@@ -86,7 +86,7 @@ if test "$echo_cflags" = "yes"; then
+ fi
+ 
+ if test "$echo_libs" = "yes"; then
+-      echo -L$libdir -ldumbnet @LIBS@
++      echo -ldumbnet @LIBS@
+ fi      
+ 
+ exit 0
