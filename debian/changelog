@@ -1,3 +1,9 @@
+libdumbnet (1.16.3-1pexip1) pexip-bookworm; urgency=medium
+
+  * Initial bookworm build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 16 Nov 2023 10:05:59 +0000
+
 libdumbnet (1.16.3-1) unstable; urgency=medium
 
   * [8e0a34e] New upstream version 1.16.3
