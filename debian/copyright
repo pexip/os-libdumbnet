@@ -12,18 +12,24 @@ Files: *
 Copyright: 2000-2006, Dug Song <dugsong@monkey.org>
 License: BSD-3-clause
 
+Files: include/dnet/arp.h
+  src/intf-win32.c
+Copyright: 2023-2024, Oliver Falk <oliver@linux-kernel.at>
+License: BSD-3-clause
+
 Files: include/queue.h
   src/memcmp.c
   src/strsep.c
 Copyright: 1990, 1993, The Regents of the University of California.
   1990, The Regents of the University of California.
   1991, 1993, The Regents of the University of California.
-License: BSD-4-clause
+License: BSD-4-Clause-UC
 
 Files: include/dnet/rand.h
   src/rand.c
 Copyright: 1996, David Mazieres <dm@lcs.mit.edu>
   2000, Dug Song <dugsong@monkey.org>
+  2023-2024, Oliver Falk <oliver@linux-kernel.at>
 License: BSD-3-clause
 
 Files: src/strlcat.c
@@ -35,7 +41,7 @@ Files: include/err.h
   src/err.c
 Copyright: 1993, The Regents of the University of California.
   2000, Dug Song <dugsong@monkey.org>
-License: BSD-4-clause
+License: BSD-4-Clause-UC
 
 Files: src/fw-pktfilter.c
 Copyright: 2001, Jean-Baptiste Marchand, Hervé Schauer Consultants.
@@ -48,7 +54,7 @@ Copyright: 1999, Masaki Hirabaru <masaki@merit.edu>
 License: BSD-3-clause
 
 Files: python/dnet.pyx
-Copyright: 2023, Oliver Falk
+Copyright: 2023-2024, Oliver Falk
 License: BSD-3-clause
 
 Files: include/dnet/sctp.h
@@ -69,7 +75,7 @@ Copyright: 2002-2003, Simon Law <sfllaw@debian.org>
   2016, Matthias Klose <doko@debian.org>
   2018, Niels Thykier <niels@thykier.net>
   2022, Sebastian Ramacher <sramacher@debian.org>
-  2022-2023, Florian Ernst <florian@debian.org>
+  2022-2025, Florian Ernst <florian@debian.org>
 License: BSD-3-clause
 
 License: BSD-3-clause
@@ -101,7 +107,7 @@ License: BSD-3-clause
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
   OF THE POSSIBILITY OF SUCH DAMAGE.
 
-License: BSD-4-clause
+License: BSD-4-Clause-UC
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions
   are met:

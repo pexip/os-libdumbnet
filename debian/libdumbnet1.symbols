@@ -72,9 +72,9 @@ libdumbnet.so.1 libdumbnet1 #MINVER#
  ndisc_close@Base 1.16.1
  ndisc_delete@Base 1.16.1
  ndisc_get@Base 1.16.1
+ ndisc_loop@Base 1.17.0
  (arch=!hurd-any)ndisc_modify@Base 1.16.1
  ndisc_open@Base 1.16.1
- nsidc_loop@Base 1.16.1
  rand_add@Base 1.8
  rand_close@Base 1.8
  rand_get@Base 1.8
@@ -93,8 +93,6 @@ libdumbnet.so.1 libdumbnet1 #MINVER#
  route_get@Base 1.8
  route_loop@Base 1.8
  route_open@Base 1.8
- strlcat@Base 1.8
- strlcpy@Base 1.8
  tun_close@Base 1.11
  tun_fileno@Base 1.11
  tun_name@Base 1.11

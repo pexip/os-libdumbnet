@@ -30,23 +30,26 @@ index 298e0d0..d3f5a57 100644
 @@ -6,7 +6,7 @@ dnl
  dnl $Id$
  
- AC_PREREQ([2.69])
--AC_INIT(libdnet, 1.16.3)
-+AC_INIT(libdumbnet, 1.16.3)
+ AC_PREREQ([2.71])
+-AC_INIT([libdnet],[1.18.0])
++AC_INIT([libdumbnet],[1.18.0])
  AC_CONFIG_MACRO_DIR([m4])
  AC_CONFIG_AUX_DIR(config)
  AC_SUBST(ac_aux_dir)
-@@ -326,7 +326,7 @@ else
+@@ -351,9 +351,9 @@ else
  	AC_LIBOBJ([tun-none])
  fi
  
--AC_OUTPUT([Makefile dnet-config include/Makefile include/dnet/Makefile
-+AC_OUTPUT([Makefile dumbnet-config include/Makefile include/dumbnet/Makefile
+-AC_CONFIG_FILES([Makefile dnet-config include/Makefile include/dnet/Makefile
++AC_CONFIG_FILES([Makefile dumbnet-config include/Makefile include/dumbnet/Makefile
  	man/Makefile src/Makefile python/Makefile python/setup.py
--	test/Makefile test/check/Makefile test/dnet/Makefile],
--	[chmod 755 dnet-config])
-+	test/Makefile test/check/Makefile test/dumbnet/Makefile],
-+	[chmod 755 dumbnet-config])
+-	python/dnet.pxd test/Makefile test/check/Makefile
+-	test/dnet/Makefile])
+-AC_CONFIG_COMMANDS([default],[chmod 755 dnet-config],[])
++	python/dnet.pxd test/Makefile test/check/Makefile
++	test/dumbnet/Makefile])
++AC_CONFIG_COMMANDS([default],[chmod 755 dumbnet-config],[])
+ AC_OUTPUT
 diff --git a/dnet-config.in b/dumbnet-config.in
 similarity index 95%
 rename from dnet-config.in
@@ -345,15 +348,15 @@ diff --git a/python/dnet.c b/python/dnet.c
 index ca40aea..eb4b81d 100644
 --- a/python/dnet.c
 +++ b/python/dnet.c
-@@ -777,7 +777,7 @@ static CYTHON_INLINE float __PYX_NAN() {
- #define __PYX_HAVE__dnet
+@@ -1219,7 +1219,7 @@ static CYTHON_INLINE float __PYX_NAN() {
  #define __PYX_HAVE_API__dnet
  /* Early includes */
+ #include "string.h"
 -#include "dnet.h"
 +#include "dumbnet.h"
- #include "bsd/string.h"
  #ifdef _OPENMP
  #include <omp.h>
+ #endif /* _OPENMP */
 diff --git a/python/dnet.pyx b/python/dumbnet.pyx
 similarity index 99%
 rename from python/dnet.pyx
@@ -362,7 +365,7 @@ index d9cbc90..c30b868 100644
 --- a/python/dnet.pyx
 +++ b/python/dumbnet.pyx
 @@ -19,7 +19,7 @@ __url__ = 'https://github.com/ofalk/libdnet'
- __version__ = '1.16.2'
+ __version__ = '1.18.0'
  
  
 -cdef extern from "dnet.h":
@@ -374,7 +377,7 @@ diff --git a/python/setup.py.in b/python/setup.py.in
 index 7da2812..08eabd2 100644
 --- a/python/setup.py.in
 +++ b/python/setup.py.in
-@@ -4,38 +4,38 @@ import glob, os, sys
+@@ -4,41 +4,41 @@ import glob, os, sys
  from setuptools import setup, Extension
  from Cython.Build import cythonize
  
@@ -428,12 +431,15 @@ index 7da2812..08eabd2 100644
 +setup(name='dumbnet',
        version='@VERSION@',
        description='low-level networking library',
-       author='Dug Song',
-       author_email='dugsong@monkey.org',
-       url='http://libdnet.sourceforge.net/',
--      ext_modules =cythonize(dnet,compiler_directives = {"c_string_type": "str", 
-+      ext_modules =cythonize(dumbnet,compiler_directives = {"c_string_type": "str", 
-         "c_string_encoding":"ascii"}),)
+       author='Oliver Falk',
+       author_email='oliver@linux-kernel.at',
+       url='https://github.com/ofalk/libdnet/',
+       ext_modules=cythonize(
+-          dnet,compiler_directives = {
++          dumbnet,compiler_directives = {
+               "c_string_type": "str",
+               "c_string_encoding":"ascii",
+               "language_level": 3
 diff --git a/src/Makefile.am b/src/Makefile.am
 index 65544bc..ede9dba 100644
 --- a/src/Makefile.am
@@ -732,7 +738,7 @@ diff --git a/src/intf-win32.c b/src/intf-win32.c
 index eb804f3..a0f140b 100644
 --- a/src/intf-win32.c
 +++ b/src/intf-win32.c
-@@ -16,7 +16,7 @@
+@@ -15,7 +15,7 @@
  #include <stdlib.h>
  #include <string.h>
  
