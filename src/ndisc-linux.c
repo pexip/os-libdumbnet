@@ -75,7 +75,6 @@ ndisc_modify(ndisc_t *n, const struct ndisc_entry *entry, int type, int flags)
 {
 	struct nlmsghdr *nmsg;
 	struct ndmsg *ndm;
-	struct rtattr *rta;
 	struct sockaddr_nl snl;
 	struct iovec iov;
 	struct msghdr msg;
@@ -178,7 +177,7 @@ ndisc_get(ndisc_t *n, struct ndisc_entry *entry)
 }
 
 int
-nsidc_loop(ndisc_t *n, ndisc_handler callback, void *arg)
+ndisc_loop(ndisc_t *n, ndisc_handler callback, void *arg)
 {
 	/* TBD */
 	errno = ENOSYS;
