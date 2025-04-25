@@ -94,7 +94,7 @@ dnl
 AC_DEFUN([AC_DNET_BSD_BPF],
     [AC_MSG_CHECKING(for Berkeley Packet Filter)
     AC_CACHE_VAL(ac_cv_dnet_bsd_bpf,
-    if test -c /dev/bpf0 ; then
+    if test -c /dev/bpf ; then
         ac_cv_dnet_bsd_bpf=yes
     else
         ac_cv_dnet_bsd_bpf=no
@@ -196,12 +196,11 @@ dnl
 AC_DEFUN([AC_DNET_IOCTL_ARP],
     [AC_MSG_CHECKING(for arp(7) ioctls)
     AC_CACHE_VAL(ac_cv_dnet_ioctl_arp,
-    AC_EGREP_CPP(werd,[#include <sys/types.h>
-                       #define BSD_COMP
-                       #include <sys/ioctl.h>
-                       #ifdef SIOCGARP
-                 werd
-                       #endif],
+    AC_COMPILE_IFELSE(
+        [AC_LANG_PROGRAM([[#include <sys/types.h>
+                           #define BSD_COMP
+                           #include <sys/ioctl.h>]],
+                          [[int foo = SIOCGARP;]])],
     ac_cv_dnet_ioctl_arp=yes,
     ac_cv_dnet_ioctl_arp=no))
     case "$host_os" in

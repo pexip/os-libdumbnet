@@ -9,7 +9,7 @@ Index: libdumbnet/configure.ac
 ===================================================================
 --- libdumbnet.orig/configure.ac
 +++ libdumbnet/configure.ac
-@@ -315,11 +315,7 @@ dnl Check for tun interface.
+@@ -340,11 +340,7 @@ dnl Check for tun interface.
  if test "$ac_cv_header_linux_if_tun_h" = yes ; then
  	AC_LIBOBJ([tun-linux])
  elif test "$ac_cv_header_net_if_tun_h" = yes ; then

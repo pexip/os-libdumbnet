@@ -69,7 +69,14 @@
 /* XXX - superset of ifreq, for portable SIOC{A,D}IFADDR */
 struct dnet_ifaliasreq {
 	char		ifra_name[IFNAMSIZ];
+#if defined(__OpenBSD__)
+	union {
+		struct sockaddr ifrau_addr;
+		int		ifrau_align;
+		} ifra_ifrau;
+#else
 	struct sockaddr ifra_addr;
+#endif
 	struct sockaddr ifra_brdaddr;
 	struct sockaddr ifra_mask;
 	int		ifra_cookie;	/* XXX - IRIX!@#$ */
@@ -303,7 +310,7 @@ intf_set(intf_t *intf, const struct intf_entry *entry)
 	}
 	/* Set interface address. */
 	if (entry->intf_addr.addr_type == ADDR_TYPE_IP) {
-#ifdef BSD
+#if defined(BSD) && !defined(__OpenBSD__)
 		/* XXX - why must this happen before SIOCSIFADDR? */
 		if (addr_btos(entry->intf_addr.addr_bits,
 		    &ifr.ifr_addr) == 0) {
@@ -385,12 +392,12 @@ intf_set(intf_t *intf, const struct intf_entry *entry)
 static void
 _intf_set_type(struct intf_entry *entry)
 {
-	if ((entry->intf_flags & INTF_FLAG_BROADCAST) != 0)
+	if ((entry->intf_flags & INTF_FLAG_LOOPBACK) != 0)
+		entry->intf_type = INTF_TYPE_LOOPBACK;
+	else if ((entry->intf_flags & INTF_FLAG_BROADCAST) != 0)
 		entry->intf_type = INTF_TYPE_ETH;
 	else if ((entry->intf_flags & INTF_FLAG_POINTOPOINT) != 0)
 		entry->intf_type = INTF_TYPE_TUN;
-	else if ((entry->intf_flags & INTF_FLAG_LOOPBACK) != 0)
-		entry->intf_type = INTF_TYPE_LOOPBACK;
 	else
 		entry->intf_type = INTF_TYPE_OTHER;
 }
@@ -565,7 +572,7 @@ _intf_get_aliases(intf_t *intf, struct intf_entry *entry)
 		if ((f = fopen(PROC_INET6_FILE, "r")) != NULL) {
 			while ((ap +1) < lap &&
 			       fgets(buf, sizeof(buf), f) != NULL) {
-				sscanf(buf, "%04s%04s%04s%04s%04s%04s%04s%04s %02x %02x %02x %02x %32s\n",
+				sscanf(buf, "%04s%04s%04s%04s%04s%04s%04s%04s %02x %x %02x %02x %32s\n",
 				    s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7],
 				    &idx, &bits, &scope, &flags, name);
 				if (strcmp(name, entry->intf_name) == 0) {

@@ -1,3 +1,44 @@
+libdumbnet (1.18.0-2) unstable; urgency=medium
+
+  * [d9870d9] d/copyright: clarify that some parts are actually
+    BSD-4-Clause-UC
+  * [98c46ce] d/control: Standards-Version: 4.7.2 (no further changes
+    required)
+  * [46dc92c] d/copyright: update year
+
+ -- Florian Ernst <florian@debian.org>  Sat, 08 Mar 2025 08:42:05 +0100
+
+libdumbnet (1.18.0-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload
+  * Drop strlcat/strlcpy from symbols (Closes: #1071321)
+
+ -- Bastian Germann <bage@debian.org>  Sun, 26 May 2024 16:35:47 +0000
+
+libdumbnet (1.18.0-1) unstable; urgency=medium
+
+  * [9f0ff73] New upstream version 1.18.0
+  * [2fb6bb8] debian/copyright: update for new upstream release
+  * [73e5c8b] refresh patches
+  * [dba4094] debian/control: B-D on pkgconf instead of on pkg-config
+
+ -- Florian Ernst <florian@debian.org>  Sun, 10 Mar 2024 13:11:12 +0100
+
+libdumbnet (1.17.0-1) unstable; urgency=medium
+
+  * [f85ba27] New upstream version 1.17.0
+  * [dce82d6] debian/patches/01rename_library.patch: refresh
+  * [0e461a1] debian/libdumbnet1.symbols: updated
+
+ -- Florian Ernst <florian@debian.org>  Tue, 17 Oct 2023 17:21:34 +0200
+
+libdumbnet (1.16.4-1) unstable; urgency=medium
+
+  * [4893e69] New upstream version 1.16.4
+  * [e81a2eb] refresh patches
+
+ -- Florian Ernst <florian@debian.org>  Mon, 26 Jun 2023 18:45:44 +0200
+
 libdumbnet (1.16.3-1+pexip24u3) pexip-bookworm; urgency=medium
 
   * New versioning scheme
