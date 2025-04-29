@@ -1,3 +1,9 @@
+libdumbnet (1.18.0-2+pexip25u1) pexip-trixie; urgency=medium
+
+  * Initial trixie build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Tue, 29 Apr 2025 22:35:50 +0100
+
 libdumbnet (1.18.0-2) unstable; urgency=medium
 
   * [d9870d9] d/copyright: clarify that some parts are actually
